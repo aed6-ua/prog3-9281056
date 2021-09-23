@@ -1,15 +1,27 @@
 package model;
-
+/**
+ * Coordinate: representa una coordenada en el tablero del juego ImperialCommander
+ * @author Eduard Andrei Duta | NIE: X9281056G
+ *
+ */
 
 public class Coordinate {
 	private int x;
 	private int y;
-	
+	/**
+	 * Constructor: crea una instancia de la clase Coordinate con valores x e y
+	 * @param x
+	 * @param y
+	 */
 	public Coordinate(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
-	
+	/**
+	 * Constructor de copia: crea una instancia de la clase Coordinate con los 
+	 * mismos valores que el objeto de la misma clase que se le pasa.
+	 * @param c
+	 */
 	public Coordinate(Coordinate c) {
 		this.x = c.x;
 		this.y = c.y;
