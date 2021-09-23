@@ -15,7 +15,7 @@ import org.junit.Test;
  */
 public class CoordinatePreTest {
 	
-    List vcoordinates = new ArrayList<int[]>();
+    List<int[]> vcoordinates = new ArrayList<int[]>();
     int []vcoor= {0,0,-70,-2,20}; //Para crear Coordinates
     final int DIM = vcoor.length;
     List<Coordinate> lcoor;
@@ -45,6 +45,10 @@ public class CoordinatePreTest {
 		
 		assertEquals (c1,c2);
 		assertEquals (c1.hashCode(), c2.hashCode());
+		
+		c2 = new Coordinate(vcoor[2],vcoor[3]);
+		assertEquals (c1,c2);
+		assertEquals (c1.hashCode(), c2.hashCode());
 	}
 
 	/* Se comprueba que el Constructor funciona bien. Para ello se analiza que las 
@@ -69,7 +73,17 @@ public class CoordinatePreTest {
 		assertEquals("x==-70", -70, c.getX());
 		assertEquals("y==-2", -2, c.getY());
 
-		fail ("Prueba con otra coordenada y comprueba que los valores de 'x' e 'y' son correctos");
+		c = lcoor.get(0);
+		assertEquals("x==0", 0, c.getX());
+		assertEquals("y==0", 0, c.getY());
+		
+		c = lcoor.get(1);
+		assertEquals("x==0", 0, c.getX());
+		assertEquals("y==-70", -70, c.getY());
+		
+		c = lcoor.get(3);
+		assertEquals("x==-2", -2, c.getX());
+		assertEquals("y==20", 20, c.getY());
 	}
 
 	
@@ -91,7 +105,15 @@ public class CoordinatePreTest {
 		assertEquals("y==-2", -2, c1.getY());
 
 		// haz pruebas similares con el otro método .add(x,y)
-		fail("completa el test con pruebas similares para el método .add(x,y)");
+		cadd = c1.add(0, -15);
+		
+		assertEquals("x==-70", -70, cadd.getX());
+		assertEquals("x==-17", -17, cadd.getY());
+		
+		assertNotSame(c1,cadd);
+		
+		assertEquals("x==-70", -70, c1.getX());
+		assertEquals("y==-2", -2, c1.getY());
 	}
 	
 	/* Se suman las Coordinate creadas en el setUp() y comprueba, conforme se van 
@@ -117,7 +139,10 @@ public class CoordinatePreTest {
 		    * - que el Coordinate que devuelve 'add' no es el mismo que
 	        *   el Coordinate que invocó al método.
 		    */
-		   fail ("Realiza las comprobaciones sugeridas anteriormente");
+		   assertEquals(sumx, caux1.getX());
+		   assertEquals(sumy, caux1.getY());
+		   
+		   assertNotSame(caux1, caux2);
 		}
 	}
 
@@ -150,6 +175,17 @@ public class CoordinatePreTest {
 		 *  3. equals() devuelve true cuando comparo dos objetos Coordinate distintos
 		 *     y los valores de sus componentes respectivos son iguales.
 		 */
-		fail ("Completa el test equals()");
+
+		assertTrue(c.equals(c));
+		
+		Coordinate d = lcoor.get(1);
+		assertFalse(c.equals(d));
+		
+		
+		c = lcoor.get(1);
+		assertTrue(c.equals(d));
+		
+		Coordinate e = new Coordinate(0,-70);
+		assertTrue(c.equals(e));
 	}
 }
