@@ -84,6 +84,10 @@ public class CoordinatePreTest {
 		c = lcoor.get(3);
 		assertEquals("x==-2", -2, c.getX());
 		assertEquals("y==20", 20, c.getY());
+		
+		int d = c.getX();
+		d = 30;
+		assertEquals("x==-2", -2, c.getX());
 	}
 
 	
