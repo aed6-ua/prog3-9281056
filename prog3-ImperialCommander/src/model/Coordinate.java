@@ -6,7 +6,13 @@ package model;
  */
 
 public class Coordinate {
+	/**
+	 * X coordinate.
+	 */
 	private int x;
+	/**
+	 * Y coordinate.
+	 */
 	private int y;
 	/**
 	 * public Coordinate(int x, int y): Constructor that creates Coordinate instance with x and y values as coordinates.
@@ -21,7 +27,7 @@ public class Coordinate {
 	 * public Coordinate(Coordinate c):
 	 * Copy constructor that creates a shallow copy with same X and Y values from
 	 * input object.
-	 * @param Coordinate object to be copied.
+	 * @param c : Coordinate object to be copied.
 	 */
 	public Coordinate(Coordinate c) {
 		this.x = c.x;
@@ -75,6 +81,7 @@ public class Coordinate {
 	/**
 	 * 
 	 */
+	@Override
 	public String toString() {
 			StringBuilder sb = new StringBuilder();
 			sb.append("[");
