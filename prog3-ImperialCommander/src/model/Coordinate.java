@@ -122,7 +122,7 @@ public class Coordinate implements Comparable<Coordinate>{
 	 * @return
 	 */
 	@Override
-	public int CompareTo(Coordinate otra) {
+	public int compareTo(Coordinate otra) {
 		if (this.x>otra.x) {
 			return -1;
 		}
