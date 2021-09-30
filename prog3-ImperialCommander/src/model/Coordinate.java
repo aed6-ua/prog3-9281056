@@ -1,11 +1,14 @@
 package model;
+
+import java.util.*;
+
 /**
  * Coordinate: Represents a coordinate for tabletop game ImperialCommander
  * @author Eduard Andrei Duta | NIE: X9281056G
  *
  */
 
-public class Coordinate {
+public class Coordinate implements Comparable<Coordinate>{
 	/**
 	 * X coordinate.
 	 */
@@ -113,5 +116,48 @@ public class Coordinate {
 	public Coordinate add(int x, int y) {
 		Coordinate c = new Coordinate(x+this.x, y+this.y);
 		return c;
+	}
+	/**
+	 * 
+	 * @return
+	 */
+	@Override
+	public int CompareTo(Coordinate otra) {
+		if (this.x>otra.x) {
+			return -1;
+		}
+		if (this.x<otra.x) {
+			return 1;
+		}
+		else {
+			if (this.y>otra.y) {
+				return -1;
+			}
+			if (this.y<otra.y) {
+				return 1;
+			}
+			else return 0;
+		}
+	}
+	
+	public Set<Coordinate> getNeighborhood() {
+		Set<Coordinate> ts = new TreeSet<>();
+		Coordinate up = new Coordinate(this.x, this.y+1);
+		Coordinate upl = new Coordinate(this.x-1, this.y+1);
+		Coordinate upr = new Coordinate(this.x+1, this.y+1);
+		Coordinate right = new Coordinate(this.x+1, this.y);
+		Coordinate left = new Coordinate(this.x-1, this.y);
+		Coordinate down = new Coordinate(this.x, this.y-1);
+		Coordinate downl = new Coordinate(this.x-1, this.y-1);
+		Coordinate downr = new Coordinate(this.x+1, this.y-1);
+		ts.add(up);
+		ts.add(upl);
+		ts.add(upr);
+		ts.add(right);
+		ts.add(left);
+		ts.add(down);
+		ts.add(downl);
+		ts.add(downr);
+		return ts;
 	}
 }
