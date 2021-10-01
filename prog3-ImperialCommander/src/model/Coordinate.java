@@ -142,7 +142,8 @@ public class Coordinate implements Comparable<Coordinate>{
 	
 	public Set<Coordinate> getNeighborhood() {
 		Set<Coordinate> ts = new TreeSet<>();
-		Coordinate up = new Coordinate(this.x, this.y+1);
+		
+		/*Coordinate up = new Coordinate(this.x, this.y+1);
 		Coordinate upl = new Coordinate(this.x-1, this.y+1);
 		Coordinate upr = new Coordinate(this.x+1, this.y+1);
 		Coordinate right = new Coordinate(this.x+1, this.y);
@@ -158,6 +159,14 @@ public class Coordinate implements Comparable<Coordinate>{
 		ts.add(down);
 		ts.add(downl);
 		ts.add(downr);
+		return ts;*/
+		
+		for(x=this.x-1; x<this.x+2; x++) {
+			for(y=this.y-1; y<this.y+2; y++) {
+				Coordinate coor = new Coordinate(x,y);
+				ts.add(coor);
+			}
+		}
 		return ts;
 	}
 }

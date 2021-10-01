@@ -40,20 +40,38 @@ public class Fighter {
 	 * 
 	 */
 	private Ship motherShip;
-	
+	/**
+	 * 
+	 * @param type
+	 * @param mother
+	 */
 	Fighter(String type,Ship mother) {
 		this.attack = 80;
 		this.shield = 80;
 		this.velocity = 100;
-		String typec = new String(type);
-		this.type = typec;
-		Ship motherc = new Ship(mother);
-		this.motherShip = motherc;
+		this.type = new String(type);
+		this.motherShip = new Ship(mother);
 		this.position = null;
 		
 	}
-	
-	
+	/**
+	 * 
+	 * @param f
+	 */
+	public Fighter(Fighter f) {
+		this.attack = f.getAttack();
+		this.shield = f.getShield();
+		this.velocity = f.getVelocity();
+		this.type = f.getType();
+		this.motherShip = f.getMotherShip();
+		this.position = f.getPosition();
+	}
+	/**
+	 * 
+	 */
+	public static void resetNextId() {
+		nextId = 1;
+	}
 	/**
 	 * @return the type
 	 */
@@ -123,6 +141,34 @@ public class Fighter {
 	public void setPosition(Coordinate position) {
 		Coordinate copy = new Coordinate(position);
 		this.position = copy;
+	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Fighter other = (Fighter) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
+	/**
+	 * 
+	 * @return
+	 */
+	public boolean isDestroyed() {
+		if(this.shield<=0) return true;
+		else return false;
 	}
 	
 }
