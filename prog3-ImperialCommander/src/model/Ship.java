@@ -86,4 +86,45 @@ public class Ship {
 			}
 		}
 	}
+	/**
+	 * 
+	 * @param r
+	 */
+	public void updateResults(int r) {
+		if(r==1) {
+			this.wins++;
+		}
+		if(r==-1) {
+			this.losses++;
+		}
+	}
+	/**
+	 * 
+	 * @param type
+	 * @return
+	 */
+	public Fighter getFighterAvailable(String type) {
+		if(type.isEmpty()) {
+			for(Fighter f : fleet) {
+				if(!(f.isDestroyed())) return f;
+			}
+			return null;
+		}
+		else {
+			for(Fighter f: fleet) {
+				if(f.getType().equals(type) && !(f.isDestroyed())) {
+					return f;
+				}
+			}
+			return null;
+		}
+	}
+	/**
+	 * 
+	 */
+	public void purgeFleet() {
+		fleet.removeIf(n -> !(n.isDestroyed()));
+	}
+	
+	
 }
