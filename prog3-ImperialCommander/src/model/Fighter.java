@@ -170,5 +170,60 @@ public class Fighter {
 		if(this.shield<=0) return true;
 		else return false;
 	}
+	/**
+	 * 
+	 * @return
+	 */
+	public Side getSide() {
+		return this.motherShip.side;
+	}
+	/**
+	 * 
+	 * @param n
+	 * @param enemy
+	 * @return
+	 */
+	public int getDamage(int n,Fighter enemy) {
+		return (n*this.attack)/300;
+	}
+	/**
+	 * 
+	 */
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("(");
+		sb.append(this.getType());
+		sb.append(" ");
+		sb.append(this.id);
+		sb.append(" ");
+		sb.append(this.getSide());
+		sb.append(" ");
+		sb.append(this.getPosition());
+		sb.append(" {");
+		sb.append(this.getVelocity());
+		sb.append(",");
+		sb.append(this.getAttack());
+		sb.append(",");
+		sb.append(this.getShield());
+		sb.append("})");
+		String s = sb.toString();
+		return s;
+	}
 	
+	public int fight(Fighter enemy) {
+		if(this.isDestroyed() || enemy.isDestroyed()) return 0;
+		else {
+			do {
+				int n = RandomNumber.newRandomNumber(99);
+				if(((this.velocity*100)/(this.velocity+enemy.velocity))<=n) {
+					enemy.shield = enemy.shield - this.getDamage(n, enemy);
+				}
+				else {
+					this.shield = this.shield - enemy.getDamage(100-n, enemy);
+				}
+			}
+			while(!(this.isDestroyed() || enemy.isDestroyed()));
+		}
+	}
 }
