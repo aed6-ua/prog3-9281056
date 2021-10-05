@@ -50,9 +50,10 @@ public class Fighter {
 		this.shield = 80;
 		this.velocity = 100;
 		this.type = new String(type);
-		this.motherShip = new Ship(mother);
+		this.motherShip = new Ship(mother.getName(), mother.getSide());
 		this.position = null;
-		
+		this.id = nextId;
+		nextId++;
 	}
 	/**
 	 * 
@@ -114,7 +115,7 @@ public class Fighter {
 	 * @return the motherShip
 	 */
 	public Ship getMotherShip() {
-		Ship motherShip = new Ship(this.motherShip);
+		Ship motherShip = new Ship(this.motherShip.getName(), this.motherShip.getSide());
 		return motherShip;
 	}
 	/**
@@ -175,7 +176,7 @@ public class Fighter {
 	 * @return
 	 */
 	public Side getSide() {
-		return this.motherShip.side;
+		return this.motherShip.getSide();
 	}
 	/**
 	 * 
@@ -225,5 +226,7 @@ public class Fighter {
 			}
 			while(!(this.isDestroyed() || enemy.isDestroyed()));
 		}
+		if (this.isDestroyed()) return -1;
+		else return 1;
 	}
 }

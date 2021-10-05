@@ -157,7 +157,7 @@ public class Ship {
 		else {
 			StringBuilder sb = new StringBuilder();
 			Map<String, Integer> fighterMap = new HashMap<>();
-			for (Fighter f: this.fleet) {
+			for (Fighter f : this.fleet) {
 				Integer n = fighterMap.get(f.getType());
 				if (n==null) {
 					n=0;
