@@ -108,15 +108,15 @@ public class Fighter {
 	 * @return the position
 	 */
 	public Coordinate getPosition() {
-		Coordinate position = new Coordinate(this.position);
-		return position;
+		//Coordinate position = new Coordinate(this.position);
+		return this.position;
 	}
 	/**
 	 * @return the motherShip
 	 */
 	public Ship getMotherShip() {
-		Ship motherShip = new Ship(this.motherShip.getName(), this.motherShip.getSide());
-		return motherShip;
+		//Ship motherShip = new Ship(this.motherShip.getName(), this.motherShip.getSide());
+		return this.motherShip;
 	}
 	/**
 	 * @param velocity the velocity to set

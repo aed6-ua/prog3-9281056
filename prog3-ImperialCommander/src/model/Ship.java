@@ -28,7 +28,7 @@ public class Ship {
 	/**
 	 * 
 	 */
-	private List<Fighter> fleet;
+	private ArrayList<Fighter> fleet;
 	/**
 	 * 
 	 * @param name
@@ -39,7 +39,7 @@ public class Ship {
 		this.side = side;
 		this.wins = 0;
 		this.losses = 0;
-		this.fleet = null;
+		this.fleet = new ArrayList<>();
 	}
 	/**
 	 * @return the name
@@ -103,7 +103,7 @@ public class Ship {
 	 * @param type
 	 * @return
 	 */
-	public Fighter getFighterAvailable(String type) {
+	public Fighter getFirstAvailableFighter(String type) {
 		if(type.isEmpty()) {
 			for(Fighter f : fleet) {
 				if(!(f.isDestroyed())) return f;
@@ -123,7 +123,7 @@ public class Ship {
 	 * 
 	 */
 	public void purgeFleet() {
-		fleet.removeIf(n -> !(n.isDestroyed()));
+		fleet.removeIf(n -> n.isDestroyed());
 	}
 	/**
 	 * 

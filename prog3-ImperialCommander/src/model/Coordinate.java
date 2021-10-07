@@ -123,17 +123,17 @@ public class Coordinate implements Comparable<Coordinate>{
 	 */
 	@Override
 	public int compareTo(Coordinate otra) {
-		if (this.x>otra.x) {
+		if (this.x<otra.x) {
 			return -1;
 		}
-		if (this.x<otra.x) {
+		if (this.x>otra.x) {
 			return 1;
 		}
 		else {
-			if (this.y>otra.y) {
+			if (this.y<otra.y) {
 				return -1;
 			}
-			if (this.y<otra.y) {
+			if (this.y>otra.y) {
 				return 1;
 			}
 			else return 0;
@@ -161,12 +161,13 @@ public class Coordinate implements Comparable<Coordinate>{
 		ts.add(downr);
 		return ts;*/
 		
-		for(x=this.x-1; x<this.x+2; x++) {
-			for(y=this.y-1; y<this.y+2; y++) {
+		for(int x=this.x-1; x<this.x+2; x++) {
+			for(int y=this.y-1; y<this.y+2; y++) {
 				Coordinate coor = new Coordinate(x,y);
 				ts.add(coor);
 			}
 		}
+		ts.removeIf(n -> n.equals(this));
 		return ts;
 	}
 }

@@ -62,16 +62,18 @@ public class Board {
 	 */
 	public boolean inside(Coordinate c) {
 		if (c.getX()>= 0 && c.getX()<=(this.size - 1) && c.getX()>= 0 && c.getX()<=(this.size - 1) && Objects.nonNull(c)) {
-			return true;
+			if (c.getY()>= 0 && c.getY()<=(this.size - 1) && c.getY()>= 0 && c.getY()<=(this.size - 1)) {
+				return true;
+			}
 		}
-		else return false;
+		return false;
 	}
 	/**
 	 * 
 	 * @param c
 	 * @return
 	 */
-	public Set<Coordinate> getNeiborhood(Coordinate c) {
+	public Set<Coordinate> getNeighborhood(Coordinate c) {
 		Objects.requireNonNull(c);
 		Set<Coordinate> ts = new TreeSet<>(c.getNeighborhood());
 		
@@ -89,18 +91,21 @@ public class Board {
 		Objects.requireNonNull(c);
 		Objects.requireNonNull(f);
 		
-		if (this.inside(c) && !(this.getFighter(c).getSide().equals(f.getSide()))) {
-			int result = f.fight(this.getFighter(c));
-			f.getMotherShip().updateResults(result);
-			this.getFighter(c).getMotherShip().updateResults(-result);
-			if (!f.isDestroyed()) {
-				if(this.removeFighter(this.getFighter(c)))
-					this.board.put(c, f);
-					f.setPosition(c);
-					return result;
+		if (this.inside(c) && (this.board.containsKey(c))) {
+			if (!(this.getFighter(c).getSide().equals(f.getSide()))) {
+				int result = f.fight(this.getFighter(c));
+				f.getMotherShip().updateResults(result);
+				this.getFighter(c).getMotherShip().updateResults(-result);
+				if (!f.isDestroyed()) {
+					if(this.removeFighter(this.getFighter(c)))
+						this.board.put(c, f);
+						f.setPosition(c);
+						return result;
+			}
+			
 			}
 		}
-		else if (!this.board.containsKey(c) && this.inside(c)) {
+		else if (this.inside(c)) {
 			this.board.put(c, f);
 			f.setPosition(c);
 		}
@@ -110,16 +115,19 @@ public class Board {
 	public void patrol(Fighter f) {
 		Objects.requireNonNull(f);
 		if (this.board.containsKey(f.getPosition())) {
-			for (Coordinate i : this.getNeiborhood(f.getPosition())) {
-				if (!(this.getFighter(i).getSide().equals(f.getSide()))) {
-					int result =f.fight(this.getFighter(i));
-					f.getMotherShip().updateResults(result);
-					this.getFighter(i).getMotherShip().updateResults(-result);
-					if (f.isDestroyed()) {
-						this.board.remove(f.getPosition());
-						break;
+			for (Coordinate i : this.getNeighborhood(f.getPosition())) {
+				if (this.board.containsKey(i)) {
+					if (!(this.getFighter(i).getSide().equals(f.getSide()))) {
+						int result =f.fight(this.getFighter(i));
+						f.getMotherShip().updateResults(result);
+						this.getFighter(i).getMotherShip().updateResults(-result);
+						if (f.isDestroyed()) {
+							this.board.remove(f.getPosition());
+							break;
+						}
 					}
 				}
+				
 			}
 		}
 	}
