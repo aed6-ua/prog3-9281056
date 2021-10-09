@@ -155,16 +155,19 @@ public class Ship {
 			return r;
 			}
 		else {
+			
 			StringBuilder sb = new StringBuilder();
-			Map<String, Integer> fighterMap = new HashMap<>();
+			Map<String, Integer> fighterMap = new LinkedHashMap<>();
 			for (Fighter f : this.fleet) {
-				Integer n = fighterMap.get(f.getType());
-				if (n==null) {
-					n=0;
-				}
-				
-				fighterMap.put(f.getType(), n+1);
+				if (!f.isDestroyed()) {
+					Integer n = fighterMap.get(f.getType());
+					if (n==null) {
+						n=0;
+					}
+					fighterMap.put(f.getType(), n+1);
+				}	
 			}
+			if (fighterMap.isEmpty()) return (new String(""));
 			fighterMap.forEach((f,n) -> { 	sb.append(n);
 											sb.append("/");
 											sb.append(f);

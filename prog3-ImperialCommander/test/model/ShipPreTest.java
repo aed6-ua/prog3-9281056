@@ -124,10 +124,12 @@ public class ShipPreTest {
 	}
 	
 	
-	/* Se comprueba que UpdateResults(-1) incrementa wins en 1 */
+	/* Se comprueba que UpdateResults(-1) incrementa losses en 1 */
 	@Test
 	public void testUpdateResults2() {
-		fail("completa el test");
+		ship.updateResults(-1);
+		assertEquals(0,ship.getWins());
+		assertEquals(1, ship.getLosses());
 	}
 	
 	
@@ -194,7 +196,7 @@ public class ShipPreTest {
 		 * comprueba que fighter es un XWing y es el que ocupa la posición 21 de la flota
 		 */
 		
-		fail("completa el test como se indica en el comentario");
+		assertEquals ("XWing",ship.getFirstAvailableFighter("XWing").getType());
 	}
 	
 	
@@ -217,25 +219,30 @@ public class ShipPreTest {
 	 */
 	@Test
 	public void testPurgeFleet2() {
+		List<Fighter> auxFleet = ship.getFleetTest();
 		ship.addFighters(kFleet2);
+		assertEquals( 340 , auxFleet.size());
 		
 		destroy("XWing", 20);
 		destroy("AWing",7);
 		// completa el test con algunos destroy(...) más
-		// destroy(...)
+		destroy("ZWing",1);
+		destroy("TIEShuttle",2);
+		destroy("TIEBomber",3);
 		
 		ship.purgeFleet();
 		//Comprobamos total Fighters en ship
 		 
-		List<Fighter> auxFleet = ship.getFleetTest();
-		// assertEquals( ?? , auxFleet.size());
+		auxFleet = ship.getFleetTest();
+		assertEquals( 307 , auxFleet.size());
 		//Comprobamos que coinciden las cantidades con cada tipo
 		assertEquals(45, numberOfFightersOk("XWing"));
 		assertEquals (3, numberOfFightersOk("AWing"));
 		// haz las mismas comprobaciones para otros cazas que hayas destruido 
-		//assertEquals (??, numberOfFightersOk("?????"));
+		assertEquals (99, numberOfFightersOk("ZWing"));
+		assertEquals (43, numberOfFightersOk("TIEShuttle"));
+		assertEquals (52, numberOfFightersOk("TIEBomber"));
 		
-		fail("completa el test");
 	}
 	
 	 
@@ -288,7 +295,12 @@ public class ShipPreTest {
 	 */
 	@Test
 	public void testMyFleet3() {
-		fail("completa el test");
+		ship.addFighters(kFleet1);
+		destroy("XWing",7);
+		destroy("AWing",12);
+		destroy("YWing",3);
+		//ship.purgeFleet();
+		assertEquals("", ship.myFleet());	
 	}
 	
 	/* Crea cazas en una nave. Destruye muchos y comprueba que showFleet solo devuelve
@@ -296,7 +308,11 @@ public class ShipPreTest {
 	 */
 	@Test
 	public void testMyFleet4() {
-		fail("completa el test");
+		ship.addFighters(kFleet1);
+		destroy("XWing",5);
+		destroy("AWing",3);
+		destroy("YWing",2);
+		assertEquals("5/XWing:3/AWing:1/YWing", ship.myFleet());
 	}
 
 	/* Comprueba toString para una nave sin cazas */

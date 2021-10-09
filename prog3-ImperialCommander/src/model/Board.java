@@ -26,6 +26,12 @@ public class Board {
 		this.board = new HashMap<>();
 	}
 	/**
+	 * @return the size
+	 */
+	public int getSize() {
+		return size;
+	}
+	/**
 	 * 
 	 * @param c
 	 * @return

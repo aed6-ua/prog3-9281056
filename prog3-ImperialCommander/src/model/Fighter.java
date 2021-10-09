@@ -50,7 +50,7 @@ public class Fighter {
 		this.shield = 80;
 		this.velocity = 100;
 		this.type = new String(type);
-		this.motherShip = new Ship(mother.getName(), mother.getSide());
+		this.motherShip = mother;
 		this.position = null;
 		this.id = nextId;
 		nextId++;
@@ -66,6 +66,7 @@ public class Fighter {
 		this.type = f.getType();
 		this.motherShip = f.getMotherShip();
 		this.position = f.getPosition();
+		this.id = f.getId();
 	}
 	/**
 	 * 
@@ -123,12 +124,14 @@ public class Fighter {
 	 */
 	public void addVelocity(int velocity) {
 		this.velocity += velocity;
+		if (this.velocity < 0) this.velocity = 0;
 	}
 	/**
 	 * @param attack the attack to set
 	 */
 	public void addAttack(int attack) {
 		this.attack += attack;
+		if (this.attack < 0) this.attack = 0;
 	}
 	/**
 	 * @param shield the shield to set
@@ -140,8 +143,8 @@ public class Fighter {
 	 * @param position the position to set
 	 */
 	public void setPosition(Coordinate position) {
-		Coordinate copy = new Coordinate(position);
-		this.position = copy;
+		//Coordinate copy = new Coordinate(position);
+		this.position = position;
 	}
 	@Override
 	public int hashCode() {
