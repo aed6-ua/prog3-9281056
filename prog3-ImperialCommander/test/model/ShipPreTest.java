@@ -16,6 +16,7 @@ public class ShipPreTest {
 	final String kFleet21 = "45/XWing:3/AWing:30/YWing:1/TIEBomber:10/TIEShuttle";
 	final String kFleet22 = "65/XWing:10/AWing:30/YWing:35/TIEFighter:55/TIEBomber:45/TIEShuttle:100/ZWing";
 	final String kToString1 = "Ship [Tydirium 0/0] 7/XWing:12/AWing:3/YWing";
+	final String kToString1x10 = "Ship [Tydirium 0/0] 70/XWing:120/AWing:30/YWing";
 	final String kToString2 = "Ship [Tydirium 30/45] 65/XWing:10/AWing:30/YWing:35/TIEFighter:55/TIEBomber:45/TIEShuttle:100/ZWing";
 	final String kShow = "(XWing 1 REBEL null {100,80,-120}) (X)\n" + 
 			"(XWing 2 REBEL null {100,80,80})\n" + 
@@ -309,10 +310,13 @@ public class ShipPreTest {
 	@Test
 	public void testMyFleet4() {
 		ship.addFighters(kFleet1);
-		destroy("XWing",5);
+		assertEquals("7/XWing:12/AWing:3/YWing", ship.myFleet());
+		destroy("XWing",4);
+		assertEquals("3/XWing:12/AWing:3/YWing", ship.myFleet());
+		destroy("XWing",1);
 		destroy("AWing",3);
 		destroy("YWing",2);
-		assertEquals("5/XWing:3/AWing:1/YWing", ship.myFleet());
+		assertEquals("9/AWing:1/YWing:2/XWing", ship.myFleet());
 	}
 
 	/* Comprueba toString para una nave sin cazas */
@@ -346,7 +350,8 @@ public class ShipPreTest {
 	 */
 	@Test
 	public void testToString4() {
-		fail("completa el test");
+		for (int i=0; i<10; i++) ship.addFighters(kFleet1);
+		assertEquals (kToString1x10, ship.toString());
 	}
 
 	/*************************************/

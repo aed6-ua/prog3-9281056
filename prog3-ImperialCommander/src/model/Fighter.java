@@ -220,11 +220,11 @@ public class Fighter {
 		else {
 			do {
 				int n = RandomNumber.newRandomNumber(99);
-				if(((this.velocity*100)/(this.velocity+enemy.velocity))<=n) {
-					enemy.shield = enemy.shield - this.getDamage(n, enemy);
+				if(((this.velocity*100)/(this.velocity+enemy.getVelocity()))<=n) {
+					enemy.addShield(-this.getDamage(n, enemy));
 				}
 				else {
-					this.shield = this.shield - enemy.getDamage(100-n, enemy);
+					this.shield = this.shield - enemy.getDamage(100-n, this);
 				}
 			}
 			while(!(this.isDestroyed() || enemy.isDestroyed()));

@@ -53,6 +53,8 @@ public class Board {
 	 */
 	public boolean removeFighter(Fighter f) {
 		Objects.requireNonNull(f);
+		if (f.getPosition() == null) return false;
+		if (!this.board.containsKey(f.getPosition())) return false;	
 		if ((this.board.get(f.getPosition())).equals(f)) {
 			this.board.remove(f.getPosition());
 			return true;
@@ -98,12 +100,12 @@ public class Board {
 		Objects.requireNonNull(f);
 		
 		if (this.inside(c) && (this.board.containsKey(c))) {
-			if (!(this.getFighter(c).getSide().equals(f.getSide()))) {
-				int result = f.fight(this.getFighter(c));
+			if (!(this.board.get(c).getSide().equals(f.getSide()))) {
+				int result = f.fight(this.board.get(c));
 				f.getMotherShip().updateResults(result);
 				this.getFighter(c).getMotherShip().updateResults(-result);
 				if (!f.isDestroyed()) {
-					if(this.removeFighter(this.getFighter(c)))
+					if(this.removeFighter(this.board.get(c)))
 						this.board.put(c, f);
 						f.setPosition(c);
 						return result;
@@ -123,13 +125,16 @@ public class Board {
 		if (this.board.containsKey(f.getPosition())) {
 			for (Coordinate i : this.getNeighborhood(f.getPosition())) {
 				if (this.board.containsKey(i)) {
-					if (!(this.getFighter(i).getSide().equals(f.getSide()))) {
-						int result =f.fight(this.getFighter(i));
+					if (!(this.board.get(i).getSide().equals(f.getSide()))) {
+						int result =f.fight(this.board.get(i));
 						f.getMotherShip().updateResults(result);
-						this.getFighter(i).getMotherShip().updateResults(-result);
+						this.board.get(i).getMotherShip().updateResults(-result);
 						if (f.isDestroyed()) {
-							this.board.remove(f.getPosition());
+							this.removeFighter(f);
 							break;
+						}
+						else {
+							this.removeFighter(this.board.get(i));
 						}
 					}
 				}
