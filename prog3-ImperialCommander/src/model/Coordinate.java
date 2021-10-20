@@ -118,8 +118,11 @@ public class Coordinate implements Comparable<Coordinate>{
 		return c;
 	}
 	/**
-	 * 
-	 * @return
+	 * Compares this coordinate with the specified coordinate. 
+	 * @param coordinate to compare.
+	 * @return -1 or 1 if the x coordinate is less than or greater than the specified coordinate x. If the x is equal
+	 * checks the y coordinate and returns -1 or 1 if is less than or greater than the specified coordinate y. If both
+	 * x and y are equals returns 0.
 	 */
 	@Override
 	public int compareTo(Coordinate otra) {
@@ -139,7 +142,10 @@ public class Coordinate implements Comparable<Coordinate>{
 			else return 0;
 		}
 	}
-	
+	/**
+	 * Gets the surrounding coordinates around this coordinate.
+	 * @return a TreeSet with the surrounding coordinates.
+	 */
 	public Set<Coordinate> getNeighborhood() {
 		Set<Coordinate> ts = new TreeSet<>();
 		

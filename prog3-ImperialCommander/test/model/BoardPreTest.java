@@ -292,7 +292,16 @@ public class BoardPreTest {
 		board.launch(c,rebel); 
 		board.patrol(rebel); 
 
-		fail("completa el test como se indica en el comentario");
+		assertEquals(5, imperialShip.getLosses());
+		assertEquals(5, rebelShip.getWins());
+		assertEquals(1, imperialShip.getWins());
+		assertEquals(1, rebelShip.getLosses());
+		assertTrue(rebel.getShield()<=0);
+		for (int i=0; i<5; i++) {
+			assertTrue(imperialShip.getFleetTest().get(i).getShield()<=0);
+		}
+		
+		//fail("completa el test como se indica en el comentario");
 	}
 	
 	

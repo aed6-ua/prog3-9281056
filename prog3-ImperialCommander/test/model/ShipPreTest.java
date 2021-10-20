@@ -197,7 +197,9 @@ public class ShipPreTest {
 		 * comprueba que fighter es un XWing y es el que ocupa la posición 21 de la flota
 		 */
 		
-		assertEquals ("XWing",ship.getFirstAvailableFighter("XWing").getType());
+		assertEquals ("XWing",fighter.getType());
+		assertEquals (fighter, ship.getFleetTest().get(21));
+		assertSame (fighter, ship.getFleetTest().get(21));
 	}
 	
 	

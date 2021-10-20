@@ -214,12 +214,16 @@ public class Fighter {
 		String s = sb.toString();
 		return s;
 	}
-	
+	/**
+	 * 
+	 * @param enemy
+	 * @return
+	 */
 	public int fight(Fighter enemy) {
 		if(this.isDestroyed() || enemy.isDestroyed()) return 0;
 		else {
 			do {
-				int n = RandomNumber.newRandomNumber(99);
+				int n = RandomNumber.newRandomNumber(100);
 				if(((this.velocity*100)/(this.velocity+enemy.getVelocity()))<=n) {
 					enemy.addShield(-this.getDamage(n, enemy));
 				}

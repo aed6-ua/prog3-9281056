@@ -57,6 +57,7 @@ public class Board {
 		if (!this.board.containsKey(f.getPosition())) return false;	
 		if ((this.board.get(f.getPosition())).equals(f)) {
 			this.board.remove(f.getPosition());
+			f.setPosition(null);
 			return true;
 		}
 		else {
