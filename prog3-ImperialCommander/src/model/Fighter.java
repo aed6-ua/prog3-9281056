@@ -4,44 +4,47 @@
 package model;
 
 /**
- * @author edu
+ * Fighter used in the game ImperialCommander.
+ * @author Eduard Andrei Duta | NIE: X9281056G
  *
  */
 public class Fighter {
 	/**
-	 * 
+	 * Type of the fighter.
 	 */
 	private String type;
 	/**
-	 * 
+	 * Speed of the fighter.
 	 */
 	private int velocity;
 	/**
-	 * 
+	 * Attack of the fighter.
 	 */
 	private int attack;
 	/**
-	 * 
+	 * Shield of the fighter.
 	 */
 	private int shield;
 	/**
-	 * 
+	 * id number of the fighter (unique).
 	 */
 	private int id;
 	/**
-	 * 
+	 * Static id used to give the fighters unique id's.
 	 */
 	private static int nextId=1;
 	/**
-	 * 
+	 * Position occupied by the fighter. Can be null if it's not launched.
 	 */
 	private Coordinate position;
 	/**
-	 * 
+	 * Ship that this fighter is assigned to.
 	 */
 	private Ship motherShip;
 	/**
-	 * 
+	 * Constructor of Fighter. Creates a Fighter with the specified type and assigns it to the
+	 * specified mothership. The default values for attack and shield are 80 and 100 for velocity.
+	 * The fighter starts with null position until is launched to the board.
 	 * @param type
 	 * @param mother
 	 */
@@ -56,7 +59,8 @@ public class Fighter {
 		nextId++;
 	}
 	/**
-	 * 
+	 * Copy constructor of Fighter. Creates a Fighter with the same values for attributes as the
+	 * specified Fighter.
 	 * @param f
 	 */
 	public Fighter(Fighter f) {
@@ -69,12 +73,14 @@ public class Fighter {
 		this.id = f.getId();
 	}
 	/**
-	 * 
+	 * Resets the static nextId number used for generating the id's of the Fighters. For test
+	 * purposes only.
 	 */
 	public static void resetNextId() {
 		nextId = 1;
 	}
 	/**
+	 * Gets the type of the Fighter.
 	 * @return the type
 	 */
 	public String getType() {
@@ -82,30 +88,35 @@ public class Fighter {
 		return type;
 	}
 	/**
+	 * Gets the speed of the Fighter.
 	 * @return the velocity
 	 */
 	public int getVelocity() {
 		return velocity;
 	}
 	/**
+	 * Gets the attck of the Fighter.
 	 * @return the attack
 	 */
 	public int getAttack() {
 		return attack;
 	}
 	/**
+	 * Gets the shield of the Fighter.
 	 * @return the shield
 	 */
 	public int getShield() {
 		return shield;
 	}
 	/**
+	 * Gets theid of the Fighter.
 	 * @return the id
 	 */
 	public int getId() {
 		return id;
 	}
 	/**
+	 * Gets the position of the Fighter. If the Fighter is not launched returns null.
 	 * @return the position
 	 */
 	public Coordinate getPosition() {
@@ -113,6 +124,7 @@ public class Fighter {
 		return this.position;
 	}
 	/**
+	 * Gets the Ship that this Fighter is assigned to.
 	 * @return the motherShip
 	 */
 	public Ship getMotherShip() {
@@ -120,6 +132,7 @@ public class Fighter {
 		return this.motherShip;
 	}
 	/**
+	 * Increases the speed by specified value.
 	 * @param velocity the velocity to set
 	 */
 	public void addVelocity(int velocity) {
@@ -127,6 +140,7 @@ public class Fighter {
 		if (this.velocity < 0) this.velocity = 0;
 	}
 	/**
+	 * Increases the attack by specified value.
 	 * @param attack the attack to set
 	 */
 	public void addAttack(int attack) {
@@ -134,18 +148,23 @@ public class Fighter {
 		if (this.attack < 0) this.attack = 0;
 	}
 	/**
+	 * Increases the shield by specified value.
 	 * @param shield the shield to set
 	 */
 	public void addShield(int shield) {
 		this.shield += shield;
 	}
 	/**
+	 * Sets the position to the specified Coordinate.
 	 * @param position the position to set
 	 */
 	public void setPosition(Coordinate position) {
 		//Coordinate copy = new Coordinate(position);
 		this.position = position;
 	}
+	/**
+	 * 
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -153,6 +172,9 @@ public class Fighter {
 		result = prime * result + id;
 		return result;
 	}
+	/**
+	 * 
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -167,31 +189,32 @@ public class Fighter {
 		return true;
 	}
 	/**
-	 * 
-	 * @return
+	 * Returns true or false if the Fighter is destroyed (it's shield is 0 or below) or not.
+	 * @return true or false.
 	 */
 	public boolean isDestroyed() {
 		if(this.shield<=0) return true;
 		else return false;
 	}
 	/**
-	 * 
-	 * @return
+	 * Gets the Side of the Fighter (determined by the Side of the mothership).
+	 * @return Side of the fighter.
 	 */
 	public Side getSide() {
 		return this.motherShip.getSide();
 	}
 	/**
-	 * 
-	 * @param n
+	 * Gets the damage that the Fighter does based on it's attack and a random number.
+	 * @param n random number
 	 * @param enemy
-	 * @return
+	 * @return damage value (int).
 	 */
 	public int getDamage(int n,Fighter enemy) {
 		return (n*this.attack)/300;
 	}
 	/**
-	 * 
+	 * Returns a string representation of the object. Shows type, id, side, position, speed,
+	 * attack and shield of the Fighter.
 	 */
 	@Override
 	public String toString() {
@@ -215,9 +238,9 @@ public class Fighter {
 		return s;
 	}
 	/**
-	 * 
-	 * @param enemy
-	 * @return
+	 * The Fighter fights an enemy Fighter until one or the other is destroyed.
+	 * @param enemy Fighter
+	 * @return 0, -1 or 1 if one fighter starts the fight destroyed, the Fighter losses or wins the fight.
 	 */
 	public int fight(Fighter enemy) {
 		if(this.isDestroyed() || enemy.isDestroyed()) return 0;

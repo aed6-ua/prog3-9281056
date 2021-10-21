@@ -4,20 +4,21 @@
 package model;
 import java.util.*;
 /**
- * @author edu
+ * Board used in the game ImperialCommander.
+ * @author Eduard Andrei Duta | NIE: X9281056G
  *
  */
 public class Board {
 	/**
-	 * 
+	 * Size of the board (NxN).
 	 */
 	private int size;
 	/**
-	 * 
+	 * Board. Stores values for the Coordinates and the Fighter that occupies that coordinate.
 	 */
 	private Map<Coordinate, Fighter> board;
 	/**
-	 * 
+	 * Constructor for the Board. Creates an empty board of the specified size.
 	 * @param size
 	 */
 	public Board(int size) {
@@ -26,15 +27,16 @@ public class Board {
 		this.board = new HashMap<>();
 	}
 	/**
+	 * Gets the size of the board.
 	 * @return the size
 	 */
 	public int getSize() {
 		return size;
 	}
 	/**
-	 * 
-	 * @param c
-	 * @return
+	 * Gets the Fighter that occupies specified Coordinate.
+	 * @param c coordinate to check
+	 * @return fighter or null if the coordinate is empty.
 	 */
 	public Fighter getFighter(Coordinate c) {
 		Objects.requireNonNull(c);
@@ -47,9 +49,9 @@ public class Board {
 		}
 	}
 	/**
-	 * 
-	 * @param f
-	 * @return
+	 * Removes the specified fighter from the board.
+	 * @param f fighter to remove
+	 * @return true or false if the fighter has been removed or not
 	 */
 	public boolean removeFighter(Fighter f) {
 		Objects.requireNonNull(f);
@@ -65,9 +67,9 @@ public class Board {
 		}
 	}
 	/**
-	 * 
-	 * @param c
-	 * @return
+	 * Checks if a coordinate is inside the board.
+	 * @param c coordinate to check
+	 * @return true or false if the coordinate is inside the board or not
 	 */
 	public boolean inside(Coordinate c) {
 		if (c.getX()>= 0 && c.getX()<=(this.size - 1) && c.getX()>= 0 && c.getX()<=(this.size - 1) && Objects.nonNull(c)) {
@@ -78,9 +80,9 @@ public class Board {
 		return false;
 	}
 	/**
-	 * 
-	 * @param c
-	 * @return
+	 * Gets the surrounding coordinates of the specified coordinate inside the board.
+	 * @param c coordinate whose surroundings to return
+	 * @return TreeSet with the surrounding coordinates inside the board.
 	 */
 	public Set<Coordinate> getNeighborhood(Coordinate c) {
 		Objects.requireNonNull(c);
@@ -91,10 +93,13 @@ public class Board {
 		return ts;
 	}
 	/**
-	 * 
-	 * @param c
-	 * @param f
-	 * @return
+	 * Puts specified fighter from a ships fleet on the board on the specified coordinate.
+	 * If the coordinate is occupied by an enemy the fighter fights the enemy before. If it's occuppied
+	 * by an ally it does nothing.
+	 * @param c coordinate to put the fighter
+	 * @param f fighter to launch
+	 * @return 0 if the fighter occupied an unoccupied coordinate, the result of the fight if it was occupied
+	 * by an enemy fighter.
 	 */
 	public int launch(Coordinate c, Fighter f) {
 		Objects.requireNonNull(c);
@@ -120,7 +125,11 @@ public class Board {
 		}
 		return 0;
 	}
-	
+	/**
+	 * The specified fighter that occupies a coordinate checks surrounding coordinates and fightes all
+	 * enemy fighters.
+	 * @param f fighter to patrol
+	 */
 	public void patrol(Fighter f) {
 		Objects.requireNonNull(f);
 		if (this.board.containsKey(f.getPosition())) {

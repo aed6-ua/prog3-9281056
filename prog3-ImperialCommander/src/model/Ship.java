@@ -5,32 +5,35 @@ package model;
 
 import java.util.*;
 /**
- * @author edu
+ * The mothership of ImperialCommander that stores a fleet of fighters of the same side
+ *  and counts wins and losses of those fighters. 
+ * @author Eduard Andrei Duta | NIE: X9281056G
  *
  */
 public class Ship {
 	/**
-	 * 
+	 * The name of the ship.
 	 */
 	private String name;
 	/**
-	 * 
+	 * The side of the ship (imperial or rebel).
 	 */
 	private Side side;
 	/**
-	 * 
+	 * Number of won battles.
 	 */
 	private int wins;
 	/**
-	 * 
+	 * Number of lost battles.
 	 */
 	private int losses;
 	/**
-	 * 
+	 * List of fighters assigned to the ship.
 	 */
 	private ArrayList<Fighter> fleet;
 	/**
-	 * 
+	 * Constructor of Ship. Creates a ship with the specified name and side with wins and losses
+	 * initialized at 0 and an empty fleet.
 	 * @param name
 	 * @param side
 	 */
@@ -42,38 +45,44 @@ public class Ship {
 		this.fleet = new ArrayList<>();
 	}
 	/**
-	 * @return the name
+	 * Gets the name of the ship.
+	 * @return the name (String)
 	 */
 	public String getName() {
 		return name;
 	}
 	/**
-	 * @return the side
+	 * Gets the side of the ship.
+	 * @return the side (Side object)
 	 */
 	public Side getSide() {
 		return side;
 	}
 	/**
-	 * @return the wins
+	 * Gets the number of won battles of the ship.
+	 * @return the wins (int)
 	 */
 	public int getWins() {
 		return wins;
 	}
 	/**
-	 * @return the losses
+	 * Gets the number of lost battles of the ship.
+	 * @return the losses (int)
 	 */
 	public int getLosses() {
 		return losses;
 	}
 	/**
-	 * 
-	 * @return
+	 * Gets the fleet list. For test purposes only.
+	 * @return the fleet (List of Fighter)
 	 */
 	public List<Fighter> getFleetTest() {
 		return fleet;
 	}
 	/**
-	 * 
+	 * Adds a list of fighters to the ship specified as a string with the next format:
+	 * "numberOfFighters/typeOfFighter". Multiple types of fighter can be added divided by ":" as it follows:
+	 * "numberOfFighters1/typeOfFighter1:numberOfFighters2/typeOfFighter2". Example: "5/XWing:12/AWing:3/YWing:2/XWing"
 	 * @param fd
 	 */
 	public void addFighters(String fd) {
@@ -87,7 +96,9 @@ public class Ship {
 		}
 	}
 	/**
-	 * 
+	 * Updates the number of won or lost battles of the ship. If the parameter specified is 
+	 * positive it will add that many won battles and if it's negative it will add that many 
+	 * lost battles.
 	 * @param r
 	 */
 	public void updateResults(int r) {
@@ -99,9 +110,9 @@ public class Ship {
 		}
 	}
 	/**
-	 * 
-	 * @param type
-	 * @return
+	 * Gets the first available fighter of the fleet of the specified type
+	 * @param type of the fighter
+	 * @return first available fighter of the specified type or null if there is none.
 	 */
 	public Fighter getFirstAvailableFighter(String type) {
 		if(type.isEmpty()) {
@@ -120,14 +131,18 @@ public class Ship {
 		}
 	}
 	/**
-	 * 
+	 * Removes destroyed fighters from the fleet.
 	 */
 	public void purgeFleet() {
 		fleet.removeIf(n -> n.isDestroyed());
 	}
 	/**
-	 * 
-	 * @return
+	 * Returns a string in which each line shows a fighter of the fleet and it's values as well 
+	 * as if it's
+	 * destroyed or not. If the fighter it's destroyed it will have "(X)" string appended.
+	 * If the fleet is empty returns empty string. The order is the same in which they are inserted
+	 * in the fleet.
+	 * @return string list of fighters in the fleet (both destroyed and not destroyed).
 	 */
 	public String showFleet() {
 		if (this.fleet.isEmpty()) {
@@ -146,8 +161,10 @@ public class Ship {
 		}
 	}
 	/**
-	 * 
-	 * @return
+	 * Returns a string of all the fighters of the fleet with the format used to add fighters: 
+	 * "numberOfFighters1/typeOfFighter1:numberOfFighters2/typeOfFighter2". Example: "7/XWing:12/AWing:3/YWing".
+	 * The order is the order in which they are inserted in the fleet but grouped by types.
+	 * @return string of fighters grouped by types.
 	 */
 	public String myFleet() {
 		if (this.fleet.isEmpty()) {
@@ -178,7 +195,10 @@ public class Ship {
 			return s;
 		}
 	}
-	
+	/**
+	 * Returns a string representation of the object. The string contains the name, the won and lost
+	 * battles of the ship as well as the fleet.
+	 */
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
