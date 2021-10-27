@@ -4,7 +4,8 @@
 package model;
 
 /**
- * @author edu
+ * Side used for the ships of the ImperiaCommander game.
+ * @author Eduard Andrei Duta | NIE: X9281056G
  *
  */
 public enum Side {

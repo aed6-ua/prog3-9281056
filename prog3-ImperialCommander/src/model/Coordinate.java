@@ -119,7 +119,7 @@ public class Coordinate implements Comparable<Coordinate>{
 	}
 	/**
 	 * Compares this coordinate with the specified coordinate. 
-	 * @param coordinate to compare.
+	 * @param otra coordinate to compare.
 	 * @return -1 or 1 if the x coordinate is less than or greater than the specified coordinate x. If the x is equal
 	 * checks the y coordinate and returns -1 or 1 if is less than or greater than the specified coordinate y. If both
 	 * x and y are equals returns 0.
