@@ -111,11 +111,12 @@ public class Board {
 				f.getMotherShip().updateResults(result);
 				this.getFighter(c).getMotherShip().updateResults(-result);
 				if (!f.isDestroyed()) {
-					if(this.removeFighter(this.board.get(c)))
+					if(this.removeFighter(this.board.get(c))) {
 						this.board.put(c, f);
 						f.setPosition(c);
-						return result;
-			}
+					}
+				}
+				return result;
 			
 			}
 		}
