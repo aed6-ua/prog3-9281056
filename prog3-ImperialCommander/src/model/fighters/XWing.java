@@ -1,9 +1,12 @@
-package model;
+package model.fighters;
+
+import model.Fighter;
+import model.Ship;
 
 /**
  * The type X wing.
  */
-public class XWing extends Fighter{
+public class XWing extends Fighter {
 
     public XWing(Ship mother){
         super(mother);

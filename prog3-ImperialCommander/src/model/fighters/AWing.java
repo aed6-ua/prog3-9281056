@@ -1,5 +1,8 @@
-package model;
+package model.fighters;
 
+
+import model.Fighter;
+import model.Ship;
 
 /**
  *

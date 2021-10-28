@@ -1,6 +1,9 @@
-package model;
+package model.fighters;
 
-public class YWing extends Fighter{
+import model.Fighter;
+import model.Ship;
+
+public class YWing extends Fighter {
 
     public YWing(Ship mother) {
         super(mother);

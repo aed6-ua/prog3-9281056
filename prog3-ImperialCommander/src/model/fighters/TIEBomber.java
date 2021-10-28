@@ -1,6 +1,9 @@
-package model;
+package model.fighters;
 
-public class TIEBomber extends Fighter{
+import model.Fighter;
+import model.Ship;
+
+public class TIEBomber extends Fighter {
 
     public TIEBomber(Ship mother) {
         super(mother);
