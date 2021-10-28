@@ -8,11 +8,8 @@ package model;
  * @author Eduard Andrei Duta | NIE: X9281056G
  *
  */
-public class Fighter {
-	/**
-	 * Type of the fighter.
-	 */
-	private String type;
+public abstract class Fighter {
+	
 	/**
 	 * Speed of the fighter.
 	 */
@@ -48,11 +45,10 @@ public class Fighter {
 	 * @param type
 	 * @param mother
 	 */
-	Fighter(String type,Ship mother) {
+	protected Fighter(String type,Ship mother) {
 		this.attack = 80;
 		this.shield = 80;
 		this.velocity = 100;
-		this.type = new String(type);
 		this.motherShip = mother;
 		this.position = null;
 		this.id = nextId;
@@ -63,15 +59,18 @@ public class Fighter {
 	 * specified Fighter.
 	 * @param f fighter to copy
 	 */
-	public Fighter(Fighter f) {
+	protected Fighter(Fighter f) {
 		this.attack = f.getAttack();
 		this.shield = f.getShield();
 		this.velocity = f.getVelocity();
-		this.type = f.getType();
 		this.motherShip = f.getMotherShip();
 		this.position = f.getPosition();
 		this.id = f.getId();
 	}
+	
+	public abstract Fighter copy();
+	
+	public abstract char getSymbol();
 	/**
 	 * Resets the static nextId number used for generating the id's of the Fighters. For test
 	 * purposes only.
@@ -84,8 +83,7 @@ public class Fighter {
 	 * @return the type
 	 */
 	public String getType() {
-		String type = new String(this.type);
-		return type;
+		return getClass().getSimpleName();
 	}
 	/**
 	 * Gets the speed of the Fighter.
@@ -259,4 +257,6 @@ public class Fighter {
 		if (this.isDestroyed()) return -1;
 		else return 1;
 	}
+	
+	
 }
