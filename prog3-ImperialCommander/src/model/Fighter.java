@@ -93,7 +93,7 @@ public abstract class Fighter {
 		return velocity;
 	}
 	/**
-	 * Gets the attck of the Fighter.
+	 * Gets the attack of the Fighter.
 	 * @return the attack
 	 */
 	public int getAttack() {
@@ -107,7 +107,7 @@ public abstract class Fighter {
 		return shield;
 	}
 	/**
-	 * Gets theid of the Fighter.
+	 * Gets the id of the Fighter.
 	 * @return the id
 	 */
 	public int getId() {
@@ -191,8 +191,11 @@ public abstract class Fighter {
 	 * @return true or false.
 	 */
 	public boolean isDestroyed() {
+		/*
 		if(this.shield<=0) return true;
 		else return false;
+		 */
+		return this.shield <= 0;
 	}
 	/**
 	 * Gets the Side of the Fighter (determined by the Side of the mothership).
@@ -202,7 +205,7 @@ public abstract class Fighter {
 		return this.motherShip.getSide();
 	}
 	/**
-	 * Gets the damage that the Fighter does based on it's attack and a random number.
+	 * Gets the damage that the Fighter does, based on it's attack and a random number.
 	 * @param n random number
 	 * @param enemy to fight
 	 * @return damage value (int).
@@ -216,24 +219,21 @@ public abstract class Fighter {
 	 */
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("(");
-		sb.append(this.getType());
-		sb.append(" ");
-		sb.append(this.id);
-		sb.append(" ");
-		sb.append(this.getSide());
-		sb.append(" ");
-		sb.append(this.getPosition());
-		sb.append(" {");
-		sb.append(this.getVelocity());
-		sb.append(",");
-		sb.append(this.getAttack());
-		sb.append(",");
-		sb.append(this.getShield());
-		sb.append("})");
-		String s = sb.toString();
-		return s;
+		return "(" +
+				this.getType() +
+				" " +
+				this.id +
+				" " +
+				this.getSide() +
+				" " +
+				this.getPosition() +
+				" {" +
+				this.getVelocity() +
+				"," +
+				this.getAttack() +
+				"," +
+				this.getShield() +
+				"})";
 	}
 	/**
 	 * The Fighter fights an enemy Fighter until one or the other is destroyed.
