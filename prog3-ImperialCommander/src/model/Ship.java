@@ -38,7 +38,7 @@ public class Ship {
 	 * @param side of the ship
 	 */
 	public Ship(String name,Side side) {
-		this.name = new String(name);
+		this.name = name;
 		this.side = side;
 		this.wins = 0;
 		this.losses = 0;
@@ -86,9 +86,9 @@ public class Ship {
 	 * @param fd string of fighters to add
 	 */
 	public void addFighters(String fd) {
-		String fighters[] = fd.split(":");
+		String[] fighters = fd.split(":");
 		for(String s : fighters) {
-			String type[] = s.split("\\/");
+			String[] type = s.split("\\/");
 			int quant = Integer.parseInt(type[0]);
 			for(int i=0; i<quant; i++) {
 				this.fleet.add(new Fighter(type[1],this));
@@ -134,10 +134,10 @@ public class Ship {
 	 * Removes destroyed fighters from the fleet.
 	 */
 	public void purgeFleet() {
-		fleet.removeIf(n -> n.isDestroyed());
+		fleet.removeIf(Fighter::isDestroyed);
 	}
 	/**
-	 * Returns a string in which each line shows a fighter of the fleet and it's values as well 
+	 * Returns a string in which each line shows a fighter of the fleet, and it's values as well
 	 * as if it's
 	 * destroyed or not. If the fighter it's destroyed it will have "(X)" string appended.
 	 * If the fleet is empty returns empty string. The order is the same in which they are inserted
@@ -146,8 +146,7 @@ public class Ship {
 	 */
 	public String showFleet() {
 		if (this.fleet.isEmpty()) {
-			String r = new String("");
-			return r;
+			return "";
 			}
 		else {
 			StringBuilder sb = new StringBuilder();
@@ -156,8 +155,7 @@ public class Ship {
 				if (f.isDestroyed()) sb.append(" (X)");
 				sb.append("\n");
 			}
-			String s = sb.toString();
-			return s;
+			return sb.toString();
 		}
 	}
 	/**
@@ -168,8 +166,7 @@ public class Ship {
 	 */
 	public String myFleet() {
 		if (this.fleet.isEmpty()) {
-			String r = new String("");
-			return r;
+			return "";
 			}
 		else {
 			
@@ -184,15 +181,14 @@ public class Ship {
 					fighterMap.put(f.getType(), n+1);
 				}	
 			}
-			if (fighterMap.isEmpty()) return (new String(""));
+			if (fighterMap.isEmpty()) return ("");
 			fighterMap.forEach((f,n) -> { 	sb.append(n);
 											sb.append("/");
 											sb.append(f);
 											sb.append(":");
 										});
 			sb.deleteCharAt(sb.length() - 1);
-			String s = sb.toString();
-			return s;
+			return sb.toString();
 		}
 	}
 	/**
@@ -201,16 +197,13 @@ public class Ship {
 	 */
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("Ship [");
-		sb.append(this.name);
-		sb.append(" ");
-		sb.append(this.wins);
-		sb.append("/");
-		sb.append(this.losses);
-		sb.append("] ");
-		sb.append(this.myFleet());
-		String s = sb.toString();
-		return s;
+		return "Ship [" +
+				this.name +
+				" " +
+				this.wins +
+				"/" +
+				this.losses +
+				"] " +
+				this.myFleet();
 	}
 }
