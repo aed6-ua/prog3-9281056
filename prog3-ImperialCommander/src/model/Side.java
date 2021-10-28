@@ -9,5 +9,12 @@ package model;
  *
  */
 public enum Side {
-	IMPERIAL, REBEL
+	/**
+	 * IMPERIAL side
+	 */
+	IMPERIAL, 
+	/**
+	 * REBEL side
+	 */
+	REBEL
 }

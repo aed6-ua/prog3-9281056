@@ -34,8 +34,8 @@ public class Ship {
 	/**
 	 * Constructor of Ship. Creates a ship with the specified name and side with wins and losses
 	 * initialized at 0 and an empty fleet.
-	 * @param name
-	 * @param side
+	 * @param name of the ship
+	 * @param side of the ship
 	 */
 	public Ship(String name,Side side) {
 		this.name = new String(name);
@@ -83,7 +83,7 @@ public class Ship {
 	 * Adds a list of fighters to the ship specified as a string with the next format:
 	 * "numberOfFighters/typeOfFighter". Multiple types of fighter can be added divided by ":" as it follows:
 	 * "numberOfFighters1/typeOfFighter1:numberOfFighters2/typeOfFighter2". Example: "5/XWing:12/AWing:3/YWing:2/XWing"
-	 * @param fd
+	 * @param fd string of fighters to add
 	 */
 	public void addFighters(String fd) {
 		String fighters[] = fd.split(":");
@@ -99,7 +99,7 @@ public class Ship {
 	 * Updates the number of won or lost battles of the ship. If the parameter specified is 
 	 * positive it will add that many won battles and if it's negative it will add that many 
 	 * lost battles.
-	 * @param r
+	 * @param r number of battles to add
 	 */
 	public void updateResults(int r) {
 		if(r==1) {

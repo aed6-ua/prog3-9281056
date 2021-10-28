@@ -61,7 +61,7 @@ public class Fighter {
 	/**
 	 * Copy constructor of Fighter. Creates a Fighter with the same values for attributes as the
 	 * specified Fighter.
-	 * @param f
+	 * @param f fighter to copy
 	 */
 	public Fighter(Fighter f) {
 		this.attack = f.getAttack();
@@ -206,7 +206,7 @@ public class Fighter {
 	/**
 	 * Gets the damage that the Fighter does based on it's attack and a random number.
 	 * @param n random number
-	 * @param enemy
+	 * @param enemy to fight
 	 * @return damage value (int).
 	 */
 	public int getDamage(int n,Fighter enemy) {

@@ -19,7 +19,7 @@ public class Board {
 	private Map<Coordinate, Fighter> board;
 	/**
 	 * Constructor for the Board. Creates an empty board of the specified size.
-	 * @param size
+	 * @param size of the board
 	 */
 	public Board(int size) {
 		Objects.requireNonNull(size);
