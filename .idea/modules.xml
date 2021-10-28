@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/prog3-9281056.iml" filepath="$PROJECT_DIR$/prog3-9281056.iml" />
+      <module fileurl="file://$PROJECT_DIR$/prog3-ImperialCommander/prog3-ImperialCommander.iml" filepath="$PROJECT_DIR$/prog3-ImperialCommander/prog3-ImperialCommander.iml" />
+    </modules>
+  </component>
+</project>
