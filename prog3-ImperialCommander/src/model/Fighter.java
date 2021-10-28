@@ -42,8 +42,8 @@ public abstract class Fighter {
 	 * Constructor of Fighter. Creates a Fighter with the specified type and assigns it to the
 	 * specified mothership. The default values for attack and shield are 80 and 100 for velocity.
 	 * The fighter starts with null position until is launched to the board.
-	 * @param type
-	 * @param mother
+	 * @param type type of fighter
+	 * @param mother mothership of the fighter
 	 */
 	protected Fighter(String type,Ship mother) {
 		this.attack = 80;

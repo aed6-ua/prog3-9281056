@@ -86,25 +86,21 @@ public class Coordinate implements Comparable<Coordinate>{
 	 */
 	@Override
 	public String toString() {
-			StringBuilder sb = new StringBuilder();
-			sb.append("[");
-			sb.append(x);
-			sb.append(",");
-			sb.append(y);
-			sb.append("]");
-			String s = sb.toString();
-			return s;
+		return "[" +
+				x +
+				"," +
+				y +
+				"]";
 	}
 	/**
 	 * public Coordinate add(Coordinate c): Returns a Coordinate object with coordinates X and Y
 	 * resulting form addition of c and current object corresponding coordinates.
-	 * @param c : Object of class Coordinate whose X and Y coordinates are goingo to be added
+	 * @param c : Object of class Coordinate whose X and Y coordinates are going to be added
 	 * to current object's coordinates.
 	 * @return Object of class Coordinate with resulting X and Y.
 	 */
 	public Coordinate add(Coordinate c) {
-		Coordinate d = new Coordinate(c.x+this.x, c.y+this.y);
-		return d;
+		return new Coordinate(c.x+ this.x, c.y+ this.y);
 	}
 	/**
 	 * public Coordinate add(int x, int y): Returns a Coordinate object with coordinates X and Y
@@ -114,8 +110,7 @@ public class Coordinate implements Comparable<Coordinate>{
 	 * @return Object of class Coordinate with resulting X and Y.
 	 */
 	public Coordinate add(int x, int y) {
-		Coordinate c = new Coordinate(x+this.x, y+this.y);
-		return c;
+		return new Coordinate(x+ this.x, y+ this.y);
 	}
 	/**
 	 * Compares this coordinate with the specified coordinate. 
@@ -126,20 +121,18 @@ public class Coordinate implements Comparable<Coordinate>{
 	 */
 	@Override
 	public int compareTo(Coordinate otra) {
-		if (this.x<otra.x) {
+		int result;
+		/*if (this.x<otra.x) {
 			return -1;
 		}
 		if (this.x>otra.x) {
 			return 1;
+		}*/
+		if ((result = Integer.compare(this.x, otra.x)) == 0) {
+			return Integer.compare(this.y, otra.y);
 		}
 		else {
-			if (this.y<otra.y) {
-				return -1;
-			}
-			if (this.y>otra.y) {
-				return 1;
-			}
-			else return 0;
+			return result;
 		}
 	}
 	/**
