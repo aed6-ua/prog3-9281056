@@ -4,7 +4,7 @@
 package model;
 
 /**
- * Side used for the ships of the ImperiaCommander game.
+ * Side used for the ships of the ImperialCommander game.
  * @author Eduard Andrei Duta | NIE: X9281056G
  *
  */

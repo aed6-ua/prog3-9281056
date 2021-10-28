@@ -14,7 +14,7 @@ public class Board {
 	 */
 	private int size;
 	/**
-	 * Board. Stores values for the Coordinates and the Fighter that occupies that coordinate.
+	 * Board. It stores values for the Coordinates and the Fighter that occupies that coordinate.
 	 */
 	private Map<Coordinate, Fighter> board;
 	/**
@@ -22,7 +22,6 @@ public class Board {
 	 * @param size of the board
 	 */
 	public Board(int size) {
-		Objects.requireNonNull(size);
 		this.size = size;
 		this.board = new HashMap<>();
 	}
@@ -44,8 +43,7 @@ public class Board {
 			return null;
 		}
 		else {
-			Fighter f = new Fighter(this.board.get(c));
-			return f;
+			return new Fighter(this.board.get(c));
 		}
 	}
 	/**
@@ -73,9 +71,7 @@ public class Board {
 	 */
 	public boolean inside(Coordinate c) {
 		if (c.getX()>= 0 && c.getX()<=(this.size - 1) && c.getX()>= 0 && c.getX()<=(this.size - 1) && Objects.nonNull(c)) {
-			if (c.getY()>= 0 && c.getY()<=(this.size - 1) && c.getY()>= 0 && c.getY()<=(this.size - 1)) {
-				return true;
-			}
+			return c.getY() >= 0 && c.getY() <= (this.size - 1);
 		}
 		return false;
 	}
@@ -94,7 +90,7 @@ public class Board {
 	}
 	/**
 	 * Puts specified fighter from a ships fleet on the board on the specified coordinate.
-	 * If the coordinate is occupied by an enemy the fighter fights the enemy before. If it's occuppied
+	 * If the coordinate is occupied by an enemy the fighter fights the enemy before. If it's occupied
 	 * by an ally it does nothing.
 	 * @param c coordinate to put the fighter
 	 * @param f fighter to launch
@@ -127,7 +123,7 @@ public class Board {
 		return 0;
 	}
 	/**
-	 * The specified fighter that occupies a coordinate checks surrounding coordinates and fightes all
+	 * The specified fighter that occupies a coordinate checks surrounding coordinates and fights all
 	 * enemy fighters.
 	 * @param f fighter to patrol
 	 */
