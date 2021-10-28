@@ -1,7 +1,14 @@
 package model;
 
+
+/**
+ *
+ */
 public class AWing extends Fighter {
 
+    /**
+     * @param mother
+     */
     public AWing(Ship mother) {
         super(mother);
         this.addVelocity(40);
@@ -9,9 +16,13 @@ public class AWing extends Fighter {
         this.addShield(-50);
     }
 
+    private AWing(AWing a) {
+        super(a);
+    }
+
     @Override
     public Fighter copy() {
-        return new AWing(this.getMotherShip());
+        return new AWing(this);
     }
 
     @Override
