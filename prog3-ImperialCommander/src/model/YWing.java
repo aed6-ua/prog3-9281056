@@ -22,4 +22,13 @@ public class YWing extends Fighter{
     public char getSymbol() {
         return 'Y';
     }
+
+    @Override
+    public int getDamage(int n, Fighter enemy) {
+        if (enemy.getType().equals("TIEFighter") || enemy.getType().equals("TIEInterceptor"))
+            return super.getDamage(n,enemy)/3;
+        if (enemy.getType().equals("TIEBomber"))
+            return super.getDamage(n,enemy)/2;
+        return super.getDamage(n,enemy);
+    }
 }

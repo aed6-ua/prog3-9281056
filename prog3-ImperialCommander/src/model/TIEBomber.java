@@ -22,4 +22,13 @@ public class TIEBomber extends Fighter{
     public char getSymbol() {
         return 'b';
     }
+
+    @Override
+    public int getDamage(int n, Fighter enemy) {
+        if (enemy.getType().equals("XWing") || enemy.getType().equals("YWing"))
+            return super.getDamage(n,enemy)/2;
+        if (enemy.getType().equals("AWing"))
+            return super.getDamage(n,enemy)/3;
+        return super.getDamage(n,enemy);
+    }
 }

@@ -22,4 +22,13 @@ public class TIEInterceptor extends Fighter{
     public char getSymbol() {
         return 'i';
     }
+
+    @Override
+    public int getDamage(int n, Fighter enemy) {
+        if (enemy.getType().equals("YWing"))
+            return super.getDamage(n,enemy)*2;
+        if (enemy.getType().equals("AWing"))
+            return super.getDamage(n,enemy)/2;
+        return super.getDamage(n,enemy);
+    }
 }
