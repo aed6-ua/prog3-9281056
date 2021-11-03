@@ -3,6 +3,8 @@
  */
 package model;
 
+import model.exceptions.FighterIsDestroyedException;
+
 /**
  * Fighter used in the game ImperialCommander.
  * @author Eduard Andrei Duta | NIE: X9281056G
@@ -239,8 +241,9 @@ public abstract class Fighter {
 	 * @param enemy Fighter
 	 * @return 0, -1 or 1 if one fighter starts the fight destroyed, the Fighter losses or wins the fight.
 	 */
-	public int fight(Fighter enemy) {
-		if(this.isDestroyed() || enemy.isDestroyed()) return 0;
+	public int fight(Fighter enemy) throws FighterIsDestroyedException {
+		if(this.isDestroyed()) throw new FighterIsDestroyedException(this);
+		else if (enemy.isDestroyed()) throw new FighterIsDestroyedException(enemy);
 		else {
 			do {
 				int n = RandomNumber.newRandomNumber(100);

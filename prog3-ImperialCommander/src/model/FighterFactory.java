@@ -3,6 +3,8 @@
  */
 package model;
 
+import model.fighters.*;
+
 /**
  * @author aed6
  *
@@ -10,22 +12,14 @@ package model;
 public class FighterFactory {
 	
 	public static Fighter createFighter(String type, Ship mother) {
-		Fighter f = null;
 		switch(type) {
-			case "AWing": //f = new Fighter(type, mother);
-							break;
-			case "XWing": //f = new Fighter(type, mother);
-							break;
-			case "YWing": //f = new Fighter(type, mother);
-							break;
-			case "TIEInterceptor": //f = new Fighter(type, mother);
-							break;
-			case "TIEFighter": //f = new Fighter(type, mother);
-							break;
-			case "TIEBomber": //f = new Fighter(type, mother);
-							break;
+			case "AWing": return new AWing(mother);
+			case "XWing": return new XWing(mother);
+			case "YWing": return new YWing(mother);
+			case "TIEInterceptor": return new TIEInterceptor(mother);
+			case "TIEFighter": return new TIEFighter(mother);
+			case "TIEBomber": return new TIEBomber(mother);
 			default: return null;
 		}
-		return f;
 	}
 }

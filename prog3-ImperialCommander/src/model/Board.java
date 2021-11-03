@@ -2,6 +2,10 @@
  * 
  */
 package model;
+import model.exceptions.FighterAlreadyInBoardException;
+import model.exceptions.FighterIsDestroyedException;
+import model.exceptions.InvalidSizeException;
+
 import java.util.*;
 /**
  * Board used in the game ImperialCommander.
@@ -21,7 +25,8 @@ public class Board {
 	 * Constructor for the Board. Creates an empty board of the specified size.
 	 * @param size of the board
 	 */
-	public Board(int size) {
+	public Board(int size) throws InvalidSizeException {
+		if (size<5) throw new InvalidSizeException(size);
 		this.size = size;
 		this.board = new HashMap<>();
 	}
@@ -43,7 +48,8 @@ public class Board {
 			return null;
 		}
 		else {
-			return new Fighter(this.board.get(c));
+			Fighter f = this.board.get(c);
+			return FighterFactory.createFighter(f.getType(),f.getMotherShip());
 		}
 	}
 	/**
@@ -97,13 +103,19 @@ public class Board {
 	 * @return 0 if the fighter occupied an unoccupied coordinate, the result of the fight if it was occupied
 	 * by an enemy fighter.
 	 */
-	public int launch(Coordinate c, Fighter f) {
+	public int launch(Coordinate c, Fighter f) throws FighterAlreadyInBoardException {
 		Objects.requireNonNull(c);
 		Objects.requireNonNull(f);
-		
+		if (f.getPosition() != null) throw new FighterAlreadyInBoardException(f);
 		if (this.inside(c) && (this.board.containsKey(c))) {
 			if (!(this.board.get(c).getSide().equals(f.getSide()))) {
-				int result = f.fight(this.board.get(c));
+				int result = 0;
+				try {
+					result = f.fight(this.board.get(c));
+				} catch (FighterIsDestroyedException e) {
+					e.getMessage();
+					throw new RuntimeException();
+				}
 				f.getMotherShip().updateResults(result);
 				this.getFighter(c).getMotherShip().updateResults(-result);
 				if (!f.isDestroyed()) {
@@ -133,7 +145,13 @@ public class Board {
 			for (Coordinate i : this.getNeighborhood(f.getPosition())) {
 				if (this.board.containsKey(i)) {
 					if (!(this.board.get(i).getSide().equals(f.getSide()))) {
-						int result =f.fight(this.board.get(i));
+						int result = 0;
+						try {
+							result = f.fight(this.board.get(i));
+						} catch (FighterIsDestroyedException e) {
+							e.getMessage();
+							throw new RuntimeException();
+						}
 						f.getMotherShip().updateResults(result);
 						this.board.get(i).getMotherShip().updateResults(-result);
 						if (f.isDestroyed()) {

@@ -3,6 +3,8 @@
  */
 package model;
 
+import model.exceptions.NoFighterAvailableException;
+
 import java.util.*;
 /**
  * The mothership of ImperialCommander that stores a fleet of fighters of the same side
@@ -91,7 +93,7 @@ public class Ship {
 			String[] type = s.split("\\/");
 			int quant = Integer.parseInt(type[0]);
 			for(int i=0; i<quant; i++) {
-				this.fleet.add(new Fighter(type[1],this));
+				this.fleet.add(FighterFactory.createFighter(type[1],this));
 			}
 		}
 	}
@@ -114,12 +116,12 @@ public class Ship {
 	 * @param type of the fighter
 	 * @return first available fighter of the specified type or null if there is none.
 	 */
-	public Fighter getFirstAvailableFighter(String type) {
+	public Fighter getFirstAvailableFighter(String type) throws NoFighterAvailableException {
 		if(type.isEmpty()) {
 			for(Fighter f : fleet) {
 				if(!(f.isDestroyed())) return f;
 			}
-			return null;
+			throw new NoFighterAvailableException(type);
 		}
 		else {
 			for(Fighter f: fleet) {
@@ -127,7 +129,7 @@ public class Ship {
 					return f;
 				}
 			}
-			return null;
+			throw new NoFighterAvailableException(type);
 		}
 	}
 	/**
