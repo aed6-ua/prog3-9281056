@@ -6,11 +6,17 @@ package model;
 import model.fighters.*;
 
 /**
- * @author aed6
+ * Class used to create fighters for Imperial Commander game.
+ * @author Eduard Andrei Duta | NIE: X9281056G
  *
  */
 public class FighterFactory {
-	
+	/**
+	 * Method that calls specific constructors depending on the type of fighter specified.
+	 * @param type of fighter to create.
+	 * @param mother mothership of the fighter to create.
+	 * @return fighter created.
+	 */
 	public static Fighter createFighter(String type, Ship mother) {
 		switch(type) {
 			case "AWing": return new AWing(mother);

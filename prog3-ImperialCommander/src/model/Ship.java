@@ -115,6 +115,7 @@ public class Ship {
 	 * Gets the first available fighter of the fleet of the specified type
 	 * @param type of the fighter
 	 * @return first available fighter of the specified type or null if there is none.
+	 * @throws NoFighterAvailableException if there is no fighter of the specified type available
 	 */
 	public Fighter getFirstAvailableFighter(String type) throws NoFighterAvailableException {
 		if(type.isEmpty()) {

@@ -22,6 +22,7 @@ public class Board {
 	/**
 	 * Constructor for the Board. Creates an empty board of the specified size.
 	 * @param size of the board
+	 * @throws InvalidSizeException sizes lower than 5 not supported
 	 */
 	public Board(int size) throws InvalidSizeException {
 		if (size<5) throw new InvalidSizeException(size);
@@ -53,6 +54,7 @@ public class Board {
 	/**
 	 * Removes the specified fighter from the board.
 	 * @param f fighter to remove
+	 * @throws FighterNotInBoardException if the specified fighter is not on the board
 	 */
 	public void removeFighter(Fighter f) throws FighterNotInBoardException {
 		Objects.requireNonNull(f);
@@ -82,6 +84,7 @@ public class Board {
 	 * Gets the surrounding coordinates of the specified coordinate inside the board.
 	 * @param c coordinate whose surroundings to return
 	 * @return TreeSet with the surrounding coordinates inside the board.
+	 * @throws OutOfBoundsException if the specified coordinate is outside of the board
 	 */
 	public Set<Coordinate> getNeighborhood(Coordinate c) throws OutOfBoundsException {
 		Objects.requireNonNull(c);
@@ -102,6 +105,8 @@ public class Board {
 	 * @param f fighter to launch
 	 * @return 0 if the fighter occupied an unoccupied coordinate, the result of the fight if it was occupied
 	 * by an enemy fighter.
+	 * @throws FighterAlreadyInBoardException if the specified fighter is already on the board
+	 * @throws OutOfBoundsException if the specified coordinate is outside of the board
 	 */
 	public int launch(Coordinate c, Fighter f) throws FighterAlreadyInBoardException, OutOfBoundsException {
 		Objects.requireNonNull(c);
@@ -145,6 +150,7 @@ public class Board {
 	 * The specified fighter that occupies a coordinate checks surrounding coordinates and fights all
 	 * enemy fighters.
 	 * @param f fighter to patrol
+	 * @throws FighterNotInBoardException if the specified fighter if not on the board
 	 */
 	public void patrol(Fighter f) throws FighterNotInBoardException {
 		Objects.requireNonNull(f);

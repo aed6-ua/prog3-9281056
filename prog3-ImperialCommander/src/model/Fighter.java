@@ -8,7 +8,6 @@ import model.exceptions.FighterIsDestroyedException;
 /**
  * Fighter used in the game ImperialCommander.
  * @author Eduard Andrei Duta | NIE: X9281056G
- *
  */
 public abstract class Fighter {
 	
@@ -69,8 +68,16 @@ public abstract class Fighter {
 		this.id = f.getId();
 	}
 
+	/**
+	 * Copies a fighter.
+	 * @return a copy of the current fighter.
+	 */
 	public abstract Fighter copy();
-	
+
+	/**
+	 * Gets the symbol of a fghter.
+	 * @return the symbol of the current fighter.
+	 */
 	public abstract char getSymbol();
 	/**
 	 * Resets the static nextId number used for generating the id's of the Fighters. For test
@@ -239,7 +246,8 @@ public abstract class Fighter {
 	/**
 	 * The Fighter fights an enemy Fighter until one or the other is destroyed.
 	 * @param enemy Fighter
-	 * @return 0, -1 or 1 if one fighter starts the fight destroyed, the Fighter losses or wins the fight.
+	 * @return -1 or 1 if the Fighter losses or wins the fight.
+	 * @throws FighterIsDestroyedException if the fighter or the enemy are already destroyed
 	 */
 	public int fight(Fighter enemy) throws FighterIsDestroyedException {
 		if(this.isDestroyed()) throw new FighterIsDestroyedException(this);
