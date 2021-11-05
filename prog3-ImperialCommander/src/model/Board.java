@@ -2,9 +2,7 @@
  * 
  */
 package model;
-import model.exceptions.FighterAlreadyInBoardException;
-import model.exceptions.FighterIsDestroyedException;
-import model.exceptions.InvalidSizeException;
+import model.exceptions.*;
 
 import java.util.*;
 /**
@@ -49,25 +47,24 @@ public class Board {
 		}
 		else {
 			Fighter f = this.board.get(c);
-			return FighterFactory.createFighter(f.getType(),f.getMotherShip());
+			return f.copy();
 		}
 	}
 	/**
 	 * Removes the specified fighter from the board.
 	 * @param f fighter to remove
-	 * @return true or false if the fighter has been removed or not
 	 */
-	public boolean removeFighter(Fighter f) {
+	public void removeFighter(Fighter f) throws FighterNotInBoardException {
 		Objects.requireNonNull(f);
-		if (f.getPosition() == null) return false;
-		if (!this.board.containsKey(f.getPosition())) return false;	
+		if (!this.board.containsKey(f.getPosition())) {
+			throw new FighterNotInBoardException(f);
+		}
 		if ((this.board.get(f.getPosition())).equals(f)) {
 			this.board.remove(f.getPosition());
 			f.setPosition(null);
-			return true;
 		}
 		else {
-			return false;
+			throw new FighterNotInBoardException(f);
 		}
 	}
 	/**
@@ -86,8 +83,11 @@ public class Board {
 	 * @param c coordinate whose surroundings to return
 	 * @return TreeSet with the surrounding coordinates inside the board.
 	 */
-	public Set<Coordinate> getNeighborhood(Coordinate c) {
+	public Set<Coordinate> getNeighborhood(Coordinate c) throws OutOfBoundsException {
 		Objects.requireNonNull(c);
+		if (!this.inside(c)) {
+			throw new OutOfBoundsException(c);
+		}
 		Set<Coordinate> ts = new TreeSet<>(c.getNeighborhood());
 		
 		ts.removeIf(n -> !(this.inside(n)));
@@ -103,13 +103,14 @@ public class Board {
 	 * @return 0 if the fighter occupied an unoccupied coordinate, the result of the fight if it was occupied
 	 * by an enemy fighter.
 	 */
-	public int launch(Coordinate c, Fighter f) throws FighterAlreadyInBoardException {
+	public int launch(Coordinate c, Fighter f) throws FighterAlreadyInBoardException, OutOfBoundsException {
 		Objects.requireNonNull(c);
 		Objects.requireNonNull(f);
 		if (f.getPosition() != null) throw new FighterAlreadyInBoardException(f);
-		if (this.inside(c) && (this.board.containsKey(c))) {
+		if (!this.inside(c)) throw new OutOfBoundsException(c);
+		if ((this.board.containsKey(c))) {
 			if (!(this.board.get(c).getSide().equals(f.getSide()))) {
-				int result = 0;
+				int result;
 				try {
 					result = f.fight(this.board.get(c));
 				} catch (FighterIsDestroyedException e) {
@@ -119,16 +120,22 @@ public class Board {
 				f.getMotherShip().updateResults(result);
 				this.getFighter(c).getMotherShip().updateResults(-result);
 				if (!f.isDestroyed()) {
-					if(this.removeFighter(this.board.get(c))) {
-						this.board.put(c, f);
-						f.setPosition(c);
+					try {
+						this.removeFighter(this.board.get(c));
+
+
+					} catch (FighterNotInBoardException e) {
+						e.getMessage();
+						throw new RuntimeException();
 					}
+					this.board.put(c, f);
+					f.setPosition(c);
 				}
 				return result;
 			
 			}
 		}
-		else if (this.inside(c)) {
+		else {
 			this.board.put(c, f);
 			f.setPosition(c);
 		}
@@ -139,32 +146,50 @@ public class Board {
 	 * enemy fighters.
 	 * @param f fighter to patrol
 	 */
-	public void patrol(Fighter f) {
+	public void patrol(Fighter f) throws FighterNotInBoardException {
 		Objects.requireNonNull(f);
 		if (this.board.containsKey(f.getPosition())) {
-			for (Coordinate i : this.getNeighborhood(f.getPosition())) {
-				if (this.board.containsKey(i)) {
-					if (!(this.board.get(i).getSide().equals(f.getSide()))) {
-						int result = 0;
-						try {
-							result = f.fight(this.board.get(i));
-						} catch (FighterIsDestroyedException e) {
-							e.getMessage();
-							throw new RuntimeException();
-						}
-						f.getMotherShip().updateResults(result);
-						this.board.get(i).getMotherShip().updateResults(-result);
-						if (f.isDestroyed()) {
-							this.removeFighter(f);
-							break;
-						}
-						else {
-							this.removeFighter(this.board.get(i));
+			try {
+				for (Coordinate i : this.getNeighborhood(f.getPosition())) {
+					if (this.board.containsKey(i)) {
+						if (!(this.board.get(i).getSide().equals(f.getSide()))) {
+							int result;
+							try {
+								result = f.fight(this.board.get(i));
+							} catch (FighterIsDestroyedException e) {
+								e.getMessage();
+								throw new RuntimeException();
+							}
+							f.getMotherShip().updateResults(result);
+							this.board.get(i).getMotherShip().updateResults(-result);
+							if (f.isDestroyed()) {
+								try {
+									this.removeFighter(f);
+								} catch (FighterNotInBoardException e) {
+									e.getMessage();
+									throw new RuntimeException();
+								}
+								break;
+							}
+							else {
+								try {
+									this.removeFighter(this.board.get(i));
+								} catch (FighterNotInBoardException e) {
+									e.getMessage();
+									throw new RuntimeException();
+								}
+							}
 						}
 					}
+
 				}
-				
+			} catch (OutOfBoundsException e) {
+				e.getMessage();
+				throw new RuntimeException();
 			}
+		}
+		else {
+			throw new FighterNotInBoardException(f);
 		}
 	}
 }

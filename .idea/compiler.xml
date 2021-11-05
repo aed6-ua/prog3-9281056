@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <excludeFromCompile>
+      <file url="file://$PROJECT_DIR$/prog3-ImperialCommander/src/mains/MainP2.java" />
+      <file url="file://$PROJECT_DIR$/prog3-ImperialCommander/test/model/BoardPreTest.java" />
+      <file url="file://$PROJECT_DIR$/prog3-ImperialCommander/test/model/BoardTest.java" />
+      <file url="file://$PROJECT_DIR$/prog3-ImperialCommander/test/model/CoordinateTestP2.java" />
+      <file url="file://$PROJECT_DIR$/prog3-ImperialCommander/test/model/ShipPreTest.java" />
+      <file url="file://$PROJECT_DIR$/prog3-ImperialCommander/test/model/CoordinatePreTestP2.java" />
+      <file url="file://$PROJECT_DIR$/prog3-ImperialCommander/src/mains/MainP1.java" />
+      <file url="file://$PROJECT_DIR$/prog3-ImperialCommander/test/model/CoordinateTestP1.java" />
+      <file url="file://$PROJECT_DIR$/prog3-ImperialCommander/test/model/ShipTest.java" />
+      <file url="file://$PROJECT_DIR$/prog3-ImperialCommander/test/model/FighterPreTest.java" />
+      <file url="file://$PROJECT_DIR$/prog3-ImperialCommander/test/model/FighterTest.java" />
+      <file url="file://$PROJECT_DIR$/prog3-ImperialCommander/test/model/CoordinatePreTest.java" />
+    </excludeFromCompile>
+  </component>
+</project>

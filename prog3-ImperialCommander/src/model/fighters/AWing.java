@@ -19,9 +19,7 @@ public class AWing extends Fighter {
         this.addShield(-50);
     }
 
-    private AWing(AWing a) {
-        super(a);
-    }
+    private AWing(AWing a) { super(a); }
 
     @Override
     public Fighter copy() {
