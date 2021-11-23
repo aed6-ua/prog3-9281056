@@ -93,7 +93,8 @@ public class Ship {
 			String[] type = s.split("\\/");
 			int quant = Integer.parseInt(type[0]);
 			for(int i=0; i<quant; i++) {
-				this.fleet.add(FighterFactory.createFighter(type[1],this));
+				Fighter f = FighterFactory.createFighter(type[1],this);
+				if (!Objects.isNull(f)) this.fleet.add(f);
 			}
 		}
 	}
@@ -122,7 +123,6 @@ public class Ship {
 			for(Fighter f : fleet) {
 				if(!(f.isDestroyed())) return f;
 			}
-			throw new NoFighterAvailableException(type);
 		}
 		else {
 			for(Fighter f: fleet) {
@@ -130,8 +130,8 @@ public class Ship {
 					return f;
 				}
 			}
-			throw new NoFighterAvailableException(type);
 		}
+		throw new NoFighterAvailableException(type);
 	}
 	/**
 	 * Removes destroyed fighters from the fleet.

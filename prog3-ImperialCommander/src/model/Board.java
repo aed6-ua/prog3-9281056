@@ -194,8 +194,11 @@ public class Board {
 				throw new RuntimeException();
 			}
 		}
-		else {
+		else if (Objects.isNull(f.getPosition())) {
 			throw new FighterNotInBoardException(f);
+		}
+		else {
+			throw new RuntimeException();
 		}
 	}
 }

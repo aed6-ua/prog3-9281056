@@ -28,6 +28,6 @@ public class OutOfBoundsException extends Exception{
      */
     @Override
     public java.lang.String getMessage() {
-        return super.getMessage()+c;
+        return "ERROR: coordinate "+super.getMessage()+c+"out of board";
     }
 }
