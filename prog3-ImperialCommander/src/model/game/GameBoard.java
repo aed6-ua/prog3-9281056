@@ -10,6 +10,7 @@ import java.util.Objects;
 
 /**
  * Subclass of Board used for the game
+ * @author Eduard Andrei Duta | NIE: X9281056G
  */
 public class GameBoard extends Board {
     /**
