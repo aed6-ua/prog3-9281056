@@ -18,7 +18,7 @@ public class Board {
 	/**
 	 * Board. It stores values for the Coordinates and the Fighter that occupies that coordinate.
 	 */
-	private Map<Coordinate, Fighter> board;
+	protected Map<Coordinate, Fighter> board;
 	/**
 	 * Constructor for the Board. Creates an empty board of the specified size.
 	 * @param size of the board

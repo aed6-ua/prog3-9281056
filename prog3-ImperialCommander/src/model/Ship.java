@@ -32,7 +32,7 @@ public class Ship {
 	/**
 	 * List of fighters assigned to the ship.
 	 */
-	private ArrayList<Fighter> fleet;
+	protected ArrayList<Fighter> fleet;
 	/**
 	 * Constructor of Ship. Creates a ship with the specified name and side with wins and losses
 	 * initialized at 0 and an empty fleet.
@@ -121,12 +121,12 @@ public class Ship {
 	public Fighter getFirstAvailableFighter(String type) throws NoFighterAvailableException {
 		if(type.isEmpty()) {
 			for(Fighter f : fleet) {
-				if(!(f.isDestroyed())) return f;
+				if(!(f.isDestroyed()) && Objects.isNull(f.getPosition())) return f;
 			}
 		}
 		else {
 			for(Fighter f: fleet) {
-				if(f.getType().equals(type) && !(f.isDestroyed())) {
+				if(f.getType().equals(type) && !(f.isDestroyed()) && Objects.isNull(f.getPosition())) {
 					return f;
 				}
 			}
