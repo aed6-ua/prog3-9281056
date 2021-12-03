@@ -1,11 +1,12 @@
 package model.game;
 
 import junit.framework.TestCase;
-import model.Coordinate;
-import model.RandomNumber;
-import model.Ship;
-import model.Side;
+import model.*;
+import model.exceptions.FighterAlreadyInBoardException;
 import model.exceptions.NoFighterAvailableException;
+import model.exceptions.OutOfBoundsException;
+import model.fighters.TIEBomber;
+import model.game.exceptions.WrongFighterIdException;
 import org.junit.Before;
 
 import java.util.ArrayList;
@@ -50,12 +51,23 @@ public class GameShipPreTestDudu extends TestCase {
         assertEquals(list2,imperialShip.getFightersId("ship"));
     }
 
-    public void testLaunch() {
+    public void testLaunch() throws OutOfBoundsException, FighterAlreadyInBoardException, WrongFighterIdException, NoFighterAvailableException {
+        Fighter f = imperialShip.getFirstAvailableFighter("TIEBomber");
+        Coordinate c = new Coordinate(5,5);
+        imperialShip.launch(5,c,board);
+        assertEquals(f,board.getFighter(c));
     }
 
     public void testPatrol() {
     }
 
-    public void testImproveFighter() {
+    public void testImproveFighter() throws NoFighterAvailableException, OutOfBoundsException, FighterAlreadyInBoardException, WrongFighterIdException {
+        Fighter f = imperialShip.getFirstAvailableFighter("TIEBomber");
+        Coordinate c = new Coordinate(5,5);
+        imperialShip.launch(5,c,board);
+        imperialShip.improveFighter(5,67,board);
+        f.addAttack(33);
+        f.addShield(34);
+        assertEquals(f,imperialShip.getFirstAvailableFighter("TIEBomber"));
     }
 }
