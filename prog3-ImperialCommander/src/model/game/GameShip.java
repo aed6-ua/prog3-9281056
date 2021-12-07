@@ -61,7 +61,7 @@ public class GameShip extends Ship {
     /**
      * Gets a list of fighters from the ship's fleet id that are on the board, inside the ship or everywhere.
      * @param where location of the fighters whose ids to return, "board" for fighters on the game
-     *              board or "ship" for the fighters inside the ship. Empty for the fighters either on the
+     *              board or "ship" for the fighters inside the ship. Anything else for the fighters either on the
      *              game board or inside the ship.
      * @return the list of ids for the fighters that currently are specified in where.
      */

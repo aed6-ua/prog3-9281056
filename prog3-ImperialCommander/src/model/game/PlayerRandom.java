@@ -1,7 +1,11 @@
 package model.game;
 
+import model.Coordinate;
 import model.RandomNumber;
 import model.Side;
+import model.exceptions.FighterAlreadyInBoardException;
+import model.exceptions.OutOfBoundsException;
+import model.game.exceptions.WrongFighterIdException;
 
 import java.io.BufferedReader;
 import java.util.ArrayList;
@@ -65,31 +69,35 @@ public class PlayerRandom implements IPlayer {
     public void initFighters() {
         List<String> imperial = Arrays.asList("TIEFighter","TIEBomber","TIEInterceptor");
         List<String> rebel = Arrays.asList("XWing","YWing","AWing");
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = null;
         if (this.ship.getSide().equals(Side.IMPERIAL)) {
-            for (String s:
-                 imperial) {
-                int n = RandomNumber.newRandomNumber(this.numFighters - 1);
-                sb.append(n);
-                sb.append("/");
-                sb.append(s);
-                sb.append(":");
-            }
-            sb.setLength(sb.length() - 1);
+            sb = initFightersStringBuilder(imperial);
         }
         if (this.ship.getSide().equals(Side.REBEL)) {
-            for (String t:
-                    rebel) {
-                int n = RandomNumber.newRandomNumber(this.numFighters - 1);
-                sb.append(n);
-                sb.append("/");
-                sb.append(t);
-                sb.append(":");
-            }
-            sb.setLength(sb.length() - 1);
+            sb = initFightersStringBuilder(rebel);
         }
         String fighters = sb.toString();
         this.ship.addFighters(fighters);
+    }
+
+    /**
+     * Method to build the string for initFighters using a list of possible types of fighters.
+     * For internal use of initFighters
+     * @param list list of possible fighters
+     * @return string builder with the resulting string
+     */
+    private StringBuilder initFightersStringBuilder(List<String> list) {
+        StringBuilder sb = new StringBuilder();
+        for (String s:
+             list) {
+            int n = RandomNumber.newRandomNumber(this.numFighters - 1);
+            sb.append(n);
+            sb.append("/");
+            sb.append(s);
+            sb.append(":");
+        }
+        sb.setLength(sb.length() - 1);
+        return sb;
     }
 
     /**
@@ -99,7 +107,7 @@ public class PlayerRandom implements IPlayer {
      */
     @Override
     public boolean isFleetDestroyed() {
-        return false;
+        return this.ship.isFleetDestroyed();
     }
 
     /**
@@ -109,16 +117,14 @@ public class PlayerRandom implements IPlayer {
      */
     @Override
     public String showShip() {
-        return null;
+        return this.ship.toString()+"/n"+this.ship.showFleet();
     }
 
     /**
      * Calls purgeFleet method of player's GameShip
      */
     @Override
-    public void purgeFleet() {
-
-    }
+    public void purgeFleet() { this.ship.purgeFleet();}
 
     /**
      * Does the player's next move from the following:
@@ -131,6 +137,36 @@ public class PlayerRandom implements IPlayer {
      */
     @Override
     public boolean nextPlay() {
-        return false;
+
+        int option = RandomNumber.newRandomNumber(100);
+        if (option == 99) {
+            return false;
+        }
+        else {
+            List<Integer> idList = new ArrayList<>();
+            if (option>=85 && option<=98) {
+                idList = this.ship.getFightersId("");
+                if (idList.isEmpty()) {
+                    System.err.println("ERROR: id list is Empty");
+                }
+                int n = RandomNumber.newRandomNumber(idList.size());
+                this.ship.improveFighter(idList.get(n),option,this.board);
+            }
+            else if (option>=25 && option<=85) {
+                idList = this.ship.getFightersId("ship");
+                if (idList.isEmpty()) {
+                    System.err.println("ERROR: id list is Empty");
+                }
+                int n = RandomNumber.newRandomNumber(idList.size());
+                int x = RandomNumber.newRandomNumber(this.board.getSize());
+                int y = RandomNumber.newRandomNumber(this.board.getSize());
+                Coordinate c = new Coordinate(x,y);
+                try {
+                    this.ship.launch(idList.get(n),c,this.board);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
     }
 }
