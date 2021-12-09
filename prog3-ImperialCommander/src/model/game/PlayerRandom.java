@@ -80,6 +80,7 @@ public class PlayerRandom implements IPlayer {
             sb = initFightersStringBuilder(rebel);
         }
         String fighters = sb.toString();
+        if (!fighters.isEmpty())
         this.ship.addFighters(fighters);
     }
 
@@ -94,11 +95,14 @@ public class PlayerRandom implements IPlayer {
         for (String s:
              list) {
             int n = RandomNumber.newRandomNumber(this.numFighters - 1);
-            sb.append(n);
-            sb.append("/");
-            sb.append(s);
-            sb.append(":");
+            if (n != 0) {
+                sb.append(n);
+                sb.append("/");
+                sb.append(s);
+                sb.append(":");
+            }
         }
+        if (sb.length()>0)
         sb.setLength(sb.length() - 1);
         return sb;
     }

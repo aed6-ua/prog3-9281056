@@ -182,7 +182,7 @@ public class PlayerFile implements IPlayer {
                             }
                             catch (NumberFormatException e) {
                                 try {
-                                    this.ship.launch(this.ship.getFirstAvailableFighter(s[3]).getId(), c, this.board);
+                                    this.ship.launch(this.ship.getFirstAvailableFighter(s[3]).getId(), d, this.board);
                                 } catch (WrongFighterIdException | NoFighterAvailableException | OutOfBoundsException | FighterAlreadyInBoardException ex) {
                                     System.err.println("ERROR: error with the launch: ");
                                     ex.printStackTrace();

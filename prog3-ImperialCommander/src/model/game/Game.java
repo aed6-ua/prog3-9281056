@@ -38,6 +38,8 @@ public class Game {
         this.rebel = rebel;
         try {
             this.board = new GameBoard(BOARD_SIZE);
+            this.imperial.setBoard(this.board);
+            this.rebel.setBoard(this.board);
         } catch (InvalidSizeException e) {
             throw new RuntimeException();
         }
@@ -61,18 +63,18 @@ public class Game {
         Side winner;
         while (true) {
             System.out.println("BEFORE IMPERIAL");
-            this.board.toString();
-            this.imperial.toString();
-            this.rebel.toString();
+            System.out.println(this.board.toString());
+            System.out.println(this.imperial.showShip());
+            System.out.println(this.rebel.showShip());
             System.out.print("IMPERIAL("+this.board.numFighters(IMPERIAL)+"): ");
             if (!this.imperial.nextPlay()) {
                 winner = REBEL;
                 break;
             }
             System.out.println("AFTER IMPERIAL, BEFORE REBEL");
-            this.board.toString();
-            this.imperial.toString();
-            this.rebel.toString();
+            System.out.println(this.board.toString());
+            System.out.println(this.imperial.showShip());
+            System.out.println(this.rebel.showShip());
             if (this.imperial.isFleetDestroyed()) {
                 winner = REBEL;
                 break;
@@ -87,9 +89,9 @@ public class Game {
                 break;
             }
             System.out.println("AFTER REBEL");
-            this.board.toString();
-            this.imperial.toString();
-            this.rebel.toString();
+            System.out.println(this.board.toString());
+            System.out.println(this.imperial.showShip());
+            System.out.println(this.rebel.showShip());
             this.imperial.purgeFleet();
             this.rebel.purgeFleet();
             if (this.imperial.isFleetDestroyed()) {
