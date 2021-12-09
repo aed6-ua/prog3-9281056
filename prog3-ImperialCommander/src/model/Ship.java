@@ -40,6 +40,8 @@ public class Ship {
 	 * @param side of the ship
 	 */
 	public Ship(String name,Side side) {
+		Objects.requireNonNull(name);
+		Objects.requireNonNull(side);
 		this.name = name;
 		this.side = side;
 		this.wins = 0;
@@ -88,6 +90,7 @@ public class Ship {
 	 * @param fd string of fighters to add
 	 */
 	public void addFighters(String fd) {
+		Objects.requireNonNull(fd);
 		String[] fighters = fd.split(":");
 		for(String s : fighters) {
 			String[] type = s.split("\\/");
@@ -119,6 +122,7 @@ public class Ship {
 	 * @throws NoFighterAvailableException if there is no fighter of the specified type available
 	 */
 	public Fighter getFirstAvailableFighter(String type) throws NoFighterAvailableException {
+		Objects.requireNonNull(type);
 		if(type.isEmpty()) {
 			for(Fighter f : fleet) {
 				if(!(f.isDestroyed()) && Objects.isNull(f.getPosition())) return f;

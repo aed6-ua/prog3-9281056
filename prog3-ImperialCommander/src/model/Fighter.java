@@ -5,6 +5,8 @@ package model;
 
 import model.exceptions.FighterIsDestroyedException;
 
+import java.util.Objects;
+
 /**
  * Fighter used in the game ImperialCommander.
  * @author Eduard Andrei Duta | NIE: X9281056G
@@ -46,6 +48,7 @@ public abstract class Fighter {
 	 * @param mother mothership of the fighter
 	 */
 	protected Fighter(Ship mother) {
+		Objects.requireNonNull(mother);
 		this.attack = 80;
 		this.shield = 80;
 		this.velocity = 100;
@@ -219,6 +222,7 @@ public abstract class Fighter {
 	 * @return damage value (int).
 	 */
 	public int getDamage(int n,Fighter enemy) {
+		Objects.requireNonNull(enemy);
 		return (n*this.attack)/300;
 	}
 	/**
@@ -250,6 +254,7 @@ public abstract class Fighter {
 	 * @throws FighterIsDestroyedException if the fighter or the enemy are already destroyed
 	 */
 	public int fight(Fighter enemy) throws FighterIsDestroyedException {
+		Objects.requireNonNull(enemy);
 		if(this.isDestroyed()) throw new FighterIsDestroyedException(this);
 		else if (enemy.isDestroyed()) throw new FighterIsDestroyedException(enemy);
 		else {

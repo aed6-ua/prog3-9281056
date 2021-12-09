@@ -5,6 +5,8 @@ package model;
 
 import model.fighters.*;
 
+import java.util.Objects;
+
 /**
  * Class used to create fighters for Imperial Commander game.
  * @author Eduard Andrei Duta | NIE: X9281056G
@@ -18,6 +20,7 @@ public class FighterFactory {
 	 * @return fighter created.
 	 */
 	public static Fighter createFighter(String type, Ship mother) {
+		Objects.requireNonNull(mother);
 		switch(type) {
 			case "AWing": return new AWing(mother);
 			case "XWing": return new XWing(mother);

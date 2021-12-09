@@ -98,6 +98,8 @@ public class GameShip extends Ship {
      * @throws FighterAlreadyInBoardException if the fighter is already in the board.
      */
     public void launch(int id, Coordinate c, Board b) throws WrongFighterIdException, OutOfBoundsException, FighterAlreadyInBoardException {
+        Objects.requireNonNull(c);
+        Objects.requireNonNull(b);
         b.launch(c,this.getFighter(id));
     }
 
@@ -109,6 +111,7 @@ public class GameShip extends Ship {
      * @throws FighterNotInBoardException if the fighter is not on the board.
      */
     public void patrol(int id, Board b) throws WrongFighterIdException, FighterNotInBoardException {
+        Objects.requireNonNull(b);
         b.patrol(this.getFighter(id));
     }
 
@@ -124,6 +127,7 @@ public class GameShip extends Ship {
      * @throws WrongFighterIdException if the specified id is wrong
      */
     public void improveFighter(int id, int qty, Board b) throws WrongFighterIdException {
+        Objects.requireNonNull(b);
         Fighter f = this.getFighter(id);
         try {
             b.removeFighter(f);

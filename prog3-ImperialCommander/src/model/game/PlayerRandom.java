@@ -11,6 +11,7 @@ import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Class that simulates a player. Makes random plays.
@@ -38,6 +39,7 @@ public class PlayerRandom implements IPlayer {
      * @param numFighters sets numFighter attribute.
      */
     public PlayerRandom(Side side, int numFighters) {
+        Objects.requireNonNull(side);
         this.ship = new GameShip("PlayerRandom "+side+" Ship",side);
         this.numFighters = numFighters;
     }
@@ -49,7 +51,8 @@ public class PlayerRandom implements IPlayer {
      */
     @Override
     public void setBoard(GameBoard gb) {
-
+        Objects.requireNonNull(gb);
+        this.board = gb;
     }
 
     /**
@@ -59,7 +62,7 @@ public class PlayerRandom implements IPlayer {
      */
     @Override
     public GameShip getGameShip() {
-        return null;
+        return this.ship;
     }
 
     /**
@@ -150,9 +153,13 @@ public class PlayerRandom implements IPlayer {
                     System.err.println("ERROR: id list is Empty");
                 }
                 int n = RandomNumber.newRandomNumber(idList.size());
-                this.ship.improveFighter(idList.get(n),option,this.board);
+                try {
+                    this.ship.improveFighter(idList.get(n),option,this.board);
+                } catch (WrongFighterIdException e) {
+                    throw new RuntimeException();
+                }
             }
-            else if (option>=25 && option<=85) {
+            else if (option>=25 && option<85) {
                 idList = this.ship.getFightersId("ship");
                 if (idList.isEmpty()) {
                     System.err.println("ERROR: id list is Empty");
@@ -167,6 +174,19 @@ public class PlayerRandom implements IPlayer {
                     throw new RuntimeException(e);
                 }
             }
+            else if (option>=0 && option<=24) {
+                idList = this.ship.getFightersId("ship");
+                if (idList.isEmpty()) {
+                    System.err.println("ERROR: id list is Empty");
+                }
+                int n = RandomNumber.newRandomNumber(idList.size());
+                try {
+                    this.ship.patrol(idList.get(n),this.board);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
         }
+        return true;
     }
 }
