@@ -92,7 +92,7 @@ public class PlayerFile implements IPlayer {
      */
     @Override
     public String showShip() {
-        return this.ship.toString()+"\n"+this.ship.showFleet();
+        return "\n"+this.ship.toString()+this.ship.showFleet();
     }
 
     /**
@@ -122,26 +122,26 @@ public class PlayerFile implements IPlayer {
                     return false;
                 case "improve":
                     if (s.length != 3) {
-                        System.err.println("ERROR: wrong line syntax");
+                        System.out.println("ERROR: wrong line syntax");
                     }
                     else {
                         int id = Integer.parseInt(s[1]);
                         int qty = Integer.parseInt(s[2]);
                         if (qty >= 100) {
-                            System.err.println("ERROR: wrong quantity");
+                            System.out.println("ERROR: wrong quantity");
                             return true;
                         }
                         try {
                             this.ship.improveFighter(id, qty, this.board);
                         } catch (WrongFighterIdException e) {
-                            System.err.println("ERROR: error with the fighter: ");
-                            e.printStackTrace();
+                            System.out.print("ERROR: error with the fighter: ");
+                            System.out.println(e.getMessage());
                         }
                     }
                     return true;
                 case "patrol":
                     if (s.length != 2) {
-                        System.err.println("ERROR: wrong line syntax");
+                        System.out.println("ERROR: wrong line syntax");
                     }
                     else {
                         int id = Integer.parseInt(s[1]);
@@ -149,8 +149,8 @@ public class PlayerFile implements IPlayer {
                             this.ship.patrol(id, this.board);
                         }
                         catch (FighterNotInBoardException | WrongFighterIdException e) {
-                            System.err.println("ERROR: error with the fighter: ");
-                            e.printStackTrace();
+                            System.out.print("ERROR: error with the fighter: ");
+                            System.out.println(e.getMessage());
                         }
                     }
                     return true;
@@ -163,8 +163,8 @@ public class PlayerFile implements IPlayer {
                             try {
                                 this.ship.launch(this.ship.getFirstAvailableFighter("").getId(),c,this.board);
                             } catch (WrongFighterIdException | NoFighterAvailableException | OutOfBoundsException | FighterAlreadyInBoardException e) {
-                                System.err.println("ERROR: error with the fighter: ");
-                                e.printStackTrace();
+                                System.out.print("ERROR: error with the fighter: ");
+                                System.out.println(e.getMessage());
                             }
                             return true;
                         case 4:
@@ -176,21 +176,21 @@ public class PlayerFile implements IPlayer {
                                 try {
                                     this.ship.launch(id,d,this.board);
                                 } catch (WrongFighterIdException | OutOfBoundsException | FighterAlreadyInBoardException e) {
-                                    System.err.println("ERROR: error with the launch: ");
-                                    e.printStackTrace();
+                                    System.out.print("ERROR: error with the launch: ");
+                                    System.out.println(e.getMessage());
                                 }
                             }
                             catch (NumberFormatException e) {
                                 try {
                                     this.ship.launch(this.ship.getFirstAvailableFighter(s[3]).getId(), d, this.board);
                                 } catch (WrongFighterIdException | NoFighterAvailableException | OutOfBoundsException | FighterAlreadyInBoardException ex) {
-                                    System.err.println("ERROR: error with the launch: ");
-                                    ex.printStackTrace();
+                                    System.out.print("ERROR: error with the launch: ");
+                                    System.out.println(ex.getMessage());
                                 }
                             }
                             return true;
                         default:
-                            System.err.println("ERROR: wrong launch line syntax");
+                            System.out.println("ERROR: wrong launch line syntax");
                     }
                     return true;
 

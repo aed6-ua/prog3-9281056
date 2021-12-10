@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import model.exceptions.NoFighterAvailableException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -100,13 +101,40 @@ public class GameBoardPreTest {
 	 * Se comprueba que el numFighers para los cazas rebeldes e imperiales coinciden respectivamente
 	 * con los que están en el tablero.
 	 */
-	//TODO
+	//
 	@Test
 	public void testNumFighters2() throws FighterAlreadyInBoardException, OutOfBoundsException {
 		gameShip.addFighters("7/AWing:6/XWing:2/YWing");
 		GameShip gameImperialShip = new GameShip("Lanzadera T-4a", Side.IMPERIAL);
 		gameImperialShip.addFighters("3/TIEBomber:9/TIEInterceptor:2/TIEFighter");
-		fail("Termina el test");
+		int i=0;
+		int j=0;
+		int k=0;
+		for (Fighter f : gameShip.getFleetTest()) {
+			if (k==10) break;
+			if (i==gameBoard.getSize()) {
+				i=0; j+=3;
+			}
+			gameBoard.launch(new Coordinate(i,j), f);
+			i++;
+			k++;
+
+		}
+		assertEquals(10,gameBoard.numFighters(Side.REBEL));
+		i=0;
+		j=1;
+		k=0;
+		for (Fighter f : gameImperialShip.getFleetTest()) {
+			if (k==10) break;
+			if (i==gameBoard.getSize()) {
+				i=0; j+=3;
+			}
+			gameBoard.launch(new Coordinate(i,j), f);
+			i++;
+			k++;
+
+		}
+		assertEquals(10,gameBoard.numFighters(Side.IMPERIAL));
 	}
 	
 	/* Se prueba toString para un tablero de 15x15 vacío
@@ -127,9 +155,34 @@ public class GameBoardPreTest {
 	 */
 	//TODO
 	@Test
-	public void testToStringExample() throws FighterAlreadyInBoardException, OutOfBoundsException, InvalidSizeException {
-		
-		fail("Termina de realizar el test");
+	public void testToStringExample() throws FighterAlreadyInBoardException, OutOfBoundsException, InvalidSizeException, NoFighterAvailableException {
+		gameShip.addFighters("4/XWing:5/AWing:2/YWing");
+		GameShip gameImperialShip = new GameShip("Lanzadera T-4a", Side.IMPERIAL);
+		gameImperialShip.addFighters("1/TIEInterceptor:1/TIEBomber");
+		Coordinate c = new Coordinate(3,0);
+		gameBoard.launch(c,gameShip.getFirstAvailableFighter("AWing"));
+		c = new Coordinate(8,0);
+		gameBoard.launch(c,gameShip.getFirstAvailableFighter("AWing"));
+		c = new Coordinate(7,3);
+		gameBoard.launch(c,gameShip.getFirstAvailableFighter("AWing"));
+		c = new Coordinate(3,5);
+		gameBoard.launch(c,gameShip.getFirstAvailableFighter("AWing"));
+		c = new Coordinate(9,0);
+		gameBoard.launch(c,gameShip.getFirstAvailableFighter("XWing"));
+		c = new Coordinate(4,2);
+		gameBoard.launch(c,gameShip.getFirstAvailableFighter("XWing"));
+		c = new Coordinate(8,7);
+		gameBoard.launch(c,gameShip.getFirstAvailableFighter("XWing"));
+		c = new Coordinate(3,6);
+		gameBoard.launch(c,gameShip.getFirstAvailableFighter("YWing"));
+		c = new Coordinate(4,7);
+		gameBoard.launch(c,gameShip.getFirstAvailableFighter("YWing"));
+		c = new Coordinate(1,6);
+		gameBoard.launch(c,gameImperialShip.getFirstAvailableFighter("TIEInterceptor"));
+		c = new Coordinate(6,7);
+		gameBoard.launch(c,gameImperialShip.getFirstAvailableFighter("TIEBomber"));
+
+		compareLines(kEXAMPLEBOARD,gameBoard.toString());
 	}
 
 	/*************************

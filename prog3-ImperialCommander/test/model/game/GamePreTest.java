@@ -111,8 +111,19 @@ public class GamePreTest {
 		stringReader = new StringReader(inputImp);
 		BufferedReader br = new BufferedReader(stringReader);
 		plfImperial = new PlayerFile(Side.IMPERIAL, br);
-		
-		fail("Termina el test");
+
+		String inputReb = "0/ZWing\nlaunch 1 2";
+		stringReader = new StringReader(inputReb);
+		br = new BufferedReader(stringReader);
+		plfRebel = new PlayerFile(Side.REBEL, br);
+		game = new Game(plfImperial,plfRebel);
+
+		standardIO2Stream(); //Cambia salida standard a un Stream
+		Side winner = game.play();
+		String sout = Stream2StandardIO(); //Cambia salida de Stream a la consola
+		assertEquals(Side.IMPERIAL, winner);
+		String solution = readSolutionFromFile("files/testPlayEmptyRebelShip.out");
+		compareLines(solution, sout, false);
 	}
 	
 	/* Game del MainP4min.
