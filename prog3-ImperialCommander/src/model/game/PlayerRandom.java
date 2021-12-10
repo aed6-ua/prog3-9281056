@@ -94,7 +94,7 @@ public class PlayerRandom implements IPlayer {
         StringBuilder sb = new StringBuilder();
         for (String s:
              list) {
-            int n = RandomNumber.newRandomNumber(this.numFighters - 1);
+            int n = RandomNumber.newRandomNumber(this.numFighters);
             if (n != 0) {
                 sb.append(n);
                 sb.append("/");
@@ -124,7 +124,7 @@ public class PlayerRandom implements IPlayer {
      */
     @Override
     public String showShip() {
-        return this.ship.toString()+"/n"+this.ship.showFleet();
+        return this.ship.toString()+"\n"+this.ship.showFleet();
     }
 
     /**
@@ -154,7 +154,8 @@ public class PlayerRandom implements IPlayer {
             if (option>=85 && option<=98) {
                 idList = this.ship.getFightersId("");
                 if (idList.isEmpty()) {
-                    System.err.println("ERROR: id list is Empty");
+                    System.err.println("ERROR:PlayerRandom "+this.ship.getSide()+" Ship:no fighters in board or ship");
+                    return true;
                 }
                 int n = RandomNumber.newRandomNumber(idList.size());
                 try {
@@ -166,7 +167,8 @@ public class PlayerRandom implements IPlayer {
             else if (option>=25 && option<85) {
                 idList = this.ship.getFightersId("ship");
                 if (idList.isEmpty()) {
-                    System.err.println("ERROR: id list is Empty");
+                    System.err.print("ERROR:PlayerRandom "+this.ship.getSide()+" Ship:no fighters in ship\n");
+                    return true;
                 }
                 int n = RandomNumber.newRandomNumber(idList.size());
                 int x = RandomNumber.newRandomNumber(this.board.getSize());
@@ -179,9 +181,10 @@ public class PlayerRandom implements IPlayer {
                 }
             }
             else if (option>=0 && option<=24) {
-                idList = this.ship.getFightersId("ship");
+                idList = this.ship.getFightersId("board");
                 if (idList.isEmpty()) {
-                    System.err.println("ERROR: id list is Empty");
+                    System.err.println("ERROR:PlayerRandom "+this.ship.getSide()+" Ship:no fighters in board");
+                    return true;
                 }
                 int n = RandomNumber.newRandomNumber(idList.size());
                 try {
