@@ -65,7 +65,7 @@ public class Game {
             System.out.print("BEFORE IMPERIAL\n");
             System.out.print(this.board.toString()+"\n");
             System.out.print("\n"+this.imperial.showShip()+"\n");
-            System.out.print(this.rebel.showShip()+"\n");
+            System.out.print("\n"+this.rebel.showShip()+"\n");
             System.out.print("\nIMPERIAL("+this.board.numFighters(IMPERIAL)+"): ");
             if (!this.imperial.nextPlay()) {
                 winner = REBEL;
@@ -74,7 +74,7 @@ public class Game {
             System.out.print("AFTER IMPERIAL, BEFORE REBEL\n");
             System.out.print(this.board.toString()+"\n");
             System.out.print("\n"+this.imperial.showShip()+"\n");
-            System.out.print(this.rebel.showShip()+"\n");
+            System.out.print("\n"+this.rebel.showShip()+"\n");
             if (this.imperial.isFleetDestroyed()) {
                 winner = REBEL;
                 break;
@@ -91,7 +91,7 @@ public class Game {
             System.out.print("AFTER REBEL\n");
             System.out.print(this.board.toString()+"\n");
             System.out.print("\n"+this.imperial.showShip()+"\n");
-            System.out.print(this.rebel.showShip()+"\n");
+            System.out.print("\n"+this.rebel.showShip()+"\n\n");
             this.imperial.purgeFleet();
             this.rebel.purgeFleet();
             if (this.imperial.isFleetDestroyed()) {

@@ -76,7 +76,7 @@ public class PlayerRandomPreTest {
 		gs = playerRandom.getGameShip();
 		assertEquals(Side.REBEL,gs.getSide());
 		assertEquals("PlayerRandom REBEL Ship", gs.getName());
-		fail("Comprueba que el objeto playerRandom es una instancia de IPlayer");
+		assertTrue(playerRandom instanceof  IPlayer);
 	}
 
 
@@ -95,10 +95,12 @@ public class PlayerRandomPreTest {
 	 * comprueba que el fleet del GameShip asociado tiene 920 cazas y
 	 * que el ship es correcto (coincide con kIMPERIALGAMESHIP)
 	 */
-	//TODO
 	@Test
 	public void testInitFightersImperial() {
-		fail("Realiza el test");
+		PlayerRandom pr = new PlayerRandom(Side.IMPERIAL, 500);
+		pr.initFighters();
+		assertEquals(920, pr.getGameShip().getFleetTest().size());
+		assertEquals(kIMPERIALGAMESHIP, pr.getGameShip().toString());
 	}
 
 	/* Para un PlayerRandom sin iniciar (sin cazas en la nave) se comprueba que isFleetDestroyed es true
