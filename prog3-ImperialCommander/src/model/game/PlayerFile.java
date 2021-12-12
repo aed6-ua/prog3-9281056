@@ -92,7 +92,7 @@ public class PlayerFile implements IPlayer {
      */
     @Override
     public String showShip() {
-        return this.ship.toString()+this.ship.showFleet();
+        return this.ship.toString()+"\n"+this.ship.showFleet();
     }
 
     /**

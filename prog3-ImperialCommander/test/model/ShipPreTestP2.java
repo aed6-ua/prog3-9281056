@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
+import model.fighters.AWing;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -489,8 +490,18 @@ public class ShipPreTestP2 {
 	 */
 	@Test
 	public void testRequireNonNull() throws NoFighterAvailableException {
-		
-		fail("Realiza las comprobaciones de los métodos");
+
+		try {
+			Ship s = new Ship(null, Side.REBEL);
+			fail("y la excepcion?");
+		}
+		catch (NullPointerException e) {}
+
+		try {
+			Ship s = new Ship("hola", null);
+			fail("y la excepcion?");
+		}
+		catch (NullPointerException e) {}
 	}
 
 	/*************************************/

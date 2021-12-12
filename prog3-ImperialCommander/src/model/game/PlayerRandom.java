@@ -124,7 +124,7 @@ public class PlayerRandom implements IPlayer {
      */
     @Override
     public String showShip() {
-        return this.ship.toString()+this.ship.showFleet();
+        return this.ship.toString()+"\n"+this.ship.showFleet();
     }
 
     /**
@@ -154,7 +154,7 @@ public class PlayerRandom implements IPlayer {
             if (option>=85 && option<=98) {
                 idList = this.ship.getFightersId("");
                 if (idList.isEmpty()) {
-                    System.err.println("ERROR:PlayerRandom "+this.ship.getSide()+" Ship:no fighters in board or ship");
+                    System.out.print("ERROR:PlayerRandom "+this.ship.getSide()+" Ship:no fighters in board or ship\n");
                     return true;
                 }
                 int n = RandomNumber.newRandomNumber(idList.size());
@@ -167,7 +167,7 @@ public class PlayerRandom implements IPlayer {
             else if (option>=25 && option<85) {
                 idList = this.ship.getFightersId("ship");
                 if (idList.isEmpty()) {
-                    System.err.println("ERROR:PlayerRandom "+this.ship.getSide()+" Ship:no fighters in ship\n");
+                    System.out.print("ERROR:PlayerRandom "+this.ship.getSide()+" Ship:no fighters in ship\n");
                     return true;
                 }
                 int n = RandomNumber.newRandomNumber(idList.size());
@@ -183,7 +183,7 @@ public class PlayerRandom implements IPlayer {
             else if (option>=0 && option<=24) {
                 idList = this.ship.getFightersId("board");
                 if (idList.isEmpty()) {
-                    System.err.println("ERROR:PlayerRandom "+this.ship.getSide()+" Ship:no fighters in board");
+                    System.out.print("ERROR:PlayerRandom "+this.ship.getSide()+" Ship:no fighters in board\n");
                     return true;
                 }
                 int n = RandomNumber.newRandomNumber(idList.size());

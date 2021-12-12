@@ -10,6 +10,7 @@ import static org.junit.Assert.fail;
 
 import java.util.Set;
 
+import model.fighters.AWing;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -479,7 +480,35 @@ public class BoardPreTestP2 {
 	@Test
 	public void testRequireNonNull() throws FighterAlreadyInBoardException, OutOfBoundsException, FighterNotInBoardException  {
 		
-		fail("Realiza las comprobaciones de los métodos");
+		try {
+			board.launch(null, new AWing(new Ship("hola", Side.REBEL)));
+			fail("y la excepcion?");
+		}
+		catch (NullPointerException e) {}
+
+		try {
+			board.patrol(null);
+			fail("y la excepcion?");
+		}
+		catch (NullPointerException e) {}
+
+		try {
+			board.removeFighter(null);
+			fail("y la excepcion?");
+		}
+		catch (NullPointerException e) {}
+
+		try {
+			board.getFighter(null);
+			fail("y la excepcion?");
+		}
+		catch (NullPointerException e) {}
+
+		try {
+			board.getNeighborhood(null);
+			fail("y la excepcion?");
+		}
+		catch (NullPointerException e) {}
 	}
 	
 	

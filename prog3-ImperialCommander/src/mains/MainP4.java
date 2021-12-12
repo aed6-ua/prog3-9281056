@@ -25,7 +25,7 @@ public class MainP4 {
         Game g = new Game(plimperial,plrebel);
 
         Side winner = g.play();
-        System.out.println("And the winner is "+winner);
+        System.out.print("And the winner is "+winner);
     }
 
 }
