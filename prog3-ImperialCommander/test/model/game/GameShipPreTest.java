@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import model.exceptions.*;
+import model.fighters.TIEInterceptor;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -299,8 +300,16 @@ public class GameShipPreTest {
 		gameShip.addFighters("4/TIEFighter:3/TIEInterceptor:6/TIEBomber");
 		fleet = gameShip.getFleetTest();
 		gameBoard = new GameBoard(fleet.size());
-		
-		fail("Termina el test");
+		Fighter f = fleet.get(5);
+		assertTrue(f instanceof TIEInterceptor);
+		Coordinate c = new Coordinate(1,1);
+		gameBoard.launch(c,f);
+		gameShip.improveFighter(f.getId(),97, gameBoard);
+		assertEquals(gameBoard.getFighter(c), null);
+		assertEquals(null, fleet.get(5).getPosition());
+		assertEquals(133, f.getAttack());
+		assertEquals(109, f.getShield());
+
 	}
 	
 	/* Se añaden cazas a un GameShip. Se intenta mejorar uno de los cazas del GameShip que
@@ -308,7 +317,6 @@ public class GameShipPreTest {
 	 * Se intenta mejorar un id de un caza que no existe. Se comprueba que se lanza la excepción
 	 * WrongFighterIdException y que lanza el mensaje con el inicio de 'ERROR:'
 	 */
-	//TODO
 	@Test
 	public void testImproveFighterExceptions() throws FighterAlreadyInBoardException, OutOfBoundsException, InvalidSizeException {
 		gameShip.addFighters("4/TIEFighter:3/TIEInterceptor:6/TIEBomber");
@@ -320,7 +328,19 @@ public class GameShipPreTest {
 			fail("ERROR: No debió lanzar la excepción "+e.getClass().getSimpleName());
 		}
 		Fighter f=gameShip.getFleetTest().get(5);
-		fail("Termina de realizar el test");
+		assertEquals(null, fleet.get(5).getPosition());
+		assertEquals(133, f.getAttack());
+		assertEquals(109, f.getShield());
+		try {
+			gameShip.improveFighter(300,97,gameBoard);
+			fail("y la excepcion?");
+		}
+		catch (WrongFighterIdException e) {
+			assertTrue(e.getMessage().startsWith("ERROR:"));
+		}
+		catch (Exception e) {
+			fail("ERROR: No debió lanzar la excepción "+e.getClass().getSimpleName());
+		}
 	}
 	
 	/* Realiza las comprobaciones de los parámetros null en launch, patrol e improveFighter
@@ -337,7 +357,17 @@ public class GameShipPreTest {
 			gameShip.launch(2, new Coordinate(3,2), null);
 			fail("ERROR: Debió lanzar NullPointerException");
 		}catch (NullPointerException e) {}
-		fail("Termina de realizar las comprobaciones en patrol e improveFighter");
+
+
+		try {
+			gameShip.patrol(2, null);
+			fail("ERROR: Debió lanzar NullPointerException");
+		}catch (NullPointerException e) {}
+
+		try {
+			gameShip.improveFighter(2, 97, null);
+			fail("ERROR: Debió lanzar NullPointerException");
+		}catch (NullPointerException e) {}
 	}
 
 }

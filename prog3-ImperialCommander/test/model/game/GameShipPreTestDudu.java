@@ -20,10 +20,12 @@ public class GameShipPreTestDudu extends TestCase {
 
     @Before
     public void setUp() throws Exception {
+
         board = new GameBoard(10);
         rebelShip = new GameShip("Alderaan", Side.REBEL);
         imperialShip = new GameShip("Lanzadera T-4a", Side.IMPERIAL);
         RandomNumber.resetRandomCounter();
+        Fighter.resetNextId();
         rebelShip.addFighters("1/XWing:1/AWing:1/YWing");
         imperialShip.addFighters("1/TIEFighter:1/TIEBomber");
         board.launch(new Coordinate(1,1), rebelShip.getFirstAvailableFighter(""));
