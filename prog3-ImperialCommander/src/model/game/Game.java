@@ -63,18 +63,18 @@ public class Game {
         Side winner;
         while (true) {
             System.out.print("BEFORE IMPERIAL\n");
-            System.out.print(this.board.toString());
-            System.out.print(this.imperial.showShip());
-            System.out.print(this.rebel.showShip());
+            System.out.print(this.board.toString()+"\n");
+            System.out.print("\n"+this.imperial.showShip()+"\n");
+            System.out.print("\n"+this.rebel.showShip()+"\n");
             System.out.print("\nIMPERIAL("+this.board.numFighters(IMPERIAL)+"): ");
             if (!this.imperial.nextPlay()) {
                 winner = REBEL;
                 break;
             }
             System.out.print("AFTER IMPERIAL, BEFORE REBEL\n");
-            System.out.print(this.board.toString());
-            System.out.print(this.imperial.showShip());
-            System.out.print(this.rebel.showShip());
+            System.out.print(this.board.toString()+"\n");
+            System.out.print("\n"+this.imperial.showShip()+"\n");
+            System.out.print("\n"+this.rebel.showShip()+"\n");
             if (this.imperial.isFleetDestroyed()) {
                 winner = REBEL;
                 break;
@@ -83,15 +83,15 @@ public class Game {
                 winner = IMPERIAL;
                 break;
             }
-            System.out.print("REBEL("+this.board.numFighters(REBEL)+"): \n");
+            System.out.print("\nREBEL("+this.board.numFighters(REBEL)+"): ");
             if (!this.rebel.nextPlay()) {
                 winner = IMPERIAL;
                 break;
             }
             System.out.print("AFTER REBEL\n");
-            System.out.print(this.board.toString());
-            System.out.print(this.imperial.showShip());
-            System.out.print(this.rebel.showShip());
+            System.out.print(this.board.toString()+"\n");
+            System.out.print("\n"+this.imperial.showShip()+"\n");
+            System.out.print("\n"+this.rebel.showShip()+"\n\n");
             this.imperial.purgeFleet();
             this.rebel.purgeFleet();
             if (this.imperial.isFleetDestroyed()) {

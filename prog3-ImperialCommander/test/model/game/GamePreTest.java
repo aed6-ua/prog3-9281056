@@ -150,7 +150,18 @@ public class GamePreTest {
 	//TODO
 	@Test
 	public void testPlayMain2() {
-		fail("Realiza el test del MainP4");
+		PlayerRandom plimperial = new PlayerRandom(Side.IMPERIAL,3);
+
+		PlayerRandom plrebel = new PlayerRandom(Side.REBEL,3);
+		standardIO2Stream();
+		Game g = new Game(plimperial,plrebel);
+
+		Side winner = g.play();
+
+		String sout = Stream2StandardIO();
+		assertEquals(Side.IMPERIAL, winner);
+		String solution = readSolutionFromFile("files/testPlayMain2.out"); //Cambia salida de Stream a la consola
+		compareLines(solution, sout, false);
 	}
 	
 	/*Test como MainP4min, IMPERIAL hace exit 

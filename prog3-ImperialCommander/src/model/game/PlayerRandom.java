@@ -167,7 +167,7 @@ public class PlayerRandom implements IPlayer {
             else if (option>=25 && option<85) {
                 idList = this.ship.getFightersId("ship");
                 if (idList.isEmpty()) {
-                    System.err.print("ERROR:PlayerRandom "+this.ship.getSide()+" Ship:no fighters in ship\n");
+                    System.err.println("ERROR:PlayerRandom "+this.ship.getSide()+" Ship:no fighters in ship\n");
                     return true;
                 }
                 int n = RandomNumber.newRandomNumber(idList.size());

@@ -158,9 +158,10 @@ public class Ship {
 		else {
 			StringBuilder sb = new StringBuilder();
 			for(Fighter f: fleet) {
+				sb.append("\n");
 				sb.append(f.toString());
 				if (f.isDestroyed()) sb.append(" (X)");
-				sb.append("\n");
+
 			}
 			return sb.toString();
 		}

@@ -92,7 +92,7 @@ public class PlayerFile implements IPlayer {
      */
     @Override
     public String showShip() {
-        return "\n"+this.ship.toString()+this.ship.showFleet();
+        return this.ship.toString()+this.ship.showFleet();
     }
 
     /**
@@ -193,6 +193,7 @@ public class PlayerFile implements IPlayer {
                             System.out.println("ERROR: wrong launch line syntax");
                     }
                     return true;
+                default: System.out.println("ERROR: unknown instruction");
 
             }
         } catch (IOException e) {
