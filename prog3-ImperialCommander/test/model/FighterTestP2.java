@@ -1,6 +1,12 @@
 package model;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -337,6 +343,28 @@ public class FighterTestP2 {
 	public final void testHashCode() {
 		Fighter enemy = FighterFactory.createFighter("XWing", imperialShip);
 		assertNotEquals(enemy.hashCode(),fighter.hashCode());
+	}
+	
+	/* Test de comprobación de los parámetros null en Fighter */
+	@Test
+	public void testRequireNonNull() throws FighterIsDestroyedException  {
+		
+		try {
+			FighterFactory.createFighter(null, rebelShip);
+			fail("ERROR: Debió lanzar NullPointerException");
+		}catch (NullPointerException e) {}
+		try {
+			FighterFactory.createFighter("XWing", null);;
+			fail("ERROR: Debió lanzar NullPointerException");
+		}catch (NullPointerException e) {}
+		try {
+			fighter.getDamage(2, null);
+			fail("ERROR: Debió lanzar NullPointerException");
+		}catch (NullPointerException e) {}
+		try {
+			fighter.fight(null);
+			fail("ERROR: Debió lanzar NullPointerException");
+		}catch (NullPointerException e) {}
 	}
 
 }

@@ -1,7 +1,6 @@
 package model;
 
 import static org.junit.Assert.assertEquals;
-import model.fighters.*;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
@@ -198,35 +197,29 @@ public class BoardTestP2 {
 	@Test
 	public void testGetNeighborhood3() {
 		//Esquina superior derecha
-		Set<Coordinate> set;
 		try {
-			set = board.getNeighborhood(new Coordinate(-1,-1));
+			board.getNeighborhood(new Coordinate(-1,-1));
 			fail("Error: Debió lanzar la excepción OutOfBoundsException");
 		} catch (OutOfBoundsException e) { }
-		//assertEquals(1, set.size());
-		//assertTrue(set.contains(new Coordinate(0, 0)));
+	
 		//Esquina superior izquierda
-		
 		try {
-			set = board.getNeighborhood(new Coordinate(10,-1));
+			board.getNeighborhood(new Coordinate(10,-1));
 			fail("Error: Debió lanzar la excepción OutOfBoundsException");
 		} catch (OutOfBoundsException e) {	}
-		/*assertEquals(1, set.size());
-		assertTrue(set.contains(new Coordinate(9, 0)));*/
+
 		//Esquina inferior izquierda
 		try {
-			set = board.getNeighborhood(new Coordinate(-1,10));
+			board.getNeighborhood(new Coordinate(-1,10));
 			fail("Error: Debió lanzar la excepción OutOfBoundsException");
 		} catch (OutOfBoundsException e) {	}
-		/*assertEquals(1, set.size());
-		assertTrue(set.contains(new Coordinate(0, 9)));*/
+
 		//Esquina inferior derecha
 		try {
-			set = board.getNeighborhood(new Coordinate(10,10));
+			board.getNeighborhood(new Coordinate(10,10));
 			fail("Error: Debió lanzar la excepción OutOfBoundsException");
 		} catch (OutOfBoundsException e) {	}
-		/*assertEquals(1, set.size());
-		assertTrue(set.contains(new Coordinate(9, 9)));*/
+
 	}
 	
 	/* Test getNeighborhood para una coordenada central al tablero*/
@@ -469,6 +462,41 @@ public class BoardTestP2 {
 			 imperial = imperialShip.getFleetTest().get(i); 
 			 assertEquals (shields[i], imperial.getShield());
 		}	
+	}
+	
+	/* Test de comprobación de los parámetros null en Board */
+	@Test
+	public void testRequireNonNull() throws FighterAlreadyInBoardException, OutOfBoundsException, FighterNotInBoardException  {
+		
+		try {
+			board.launch(null, FighterFactory.createFighter("AWing", rebelShip));
+			fail("ERROR: Debió lanzar NullPointerException");
+		}catch (NullPointerException e) {}
+		try {
+			board.launch(new Coordinate(2,2), FighterFactory.createFighter("unTipoDeNaveQueNoExisteYDebeDevolverNull", rebelShip));
+			fail("ERROR: Debió lanzar NullPointerException");
+		}catch (NullPointerException e) {}
+		try {
+			board.launch(new Coordinate(2,2), null);
+			fail("ERROR: Debió lanzar NullPointerException");
+		}catch (NullPointerException e) {}
+		
+		try {
+			board.patrol(null);
+			fail("ERROR: Debió lanzar NullPointerException");
+		}catch (NullPointerException e) {}
+		try {
+			board.removeFighter(null);
+			fail("ERROR: Debió lanzar NullPointerException");
+		}catch (NullPointerException e) {}
+		try {
+			board.getFighter(null);
+			fail("ERROR: Debió lanzar NullPointerException");
+		}catch (NullPointerException e) {}
+		try {
+			board.getNeighborhood(null);
+			fail("ERROR: Debió lanzar NullPointerException");
+		}catch (NullPointerException e) {}
 	}
 	
 	

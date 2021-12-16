@@ -1,6 +1,12 @@
 package model;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.List;
 
@@ -91,7 +97,6 @@ public class ShipTestP2 {
 	@Test
 	public void testAddFighters1() {
 		ship.addFighters("1/XWing");
-		 
 		List<Fighter> lfleet = (List<Fighter>)ship.getFleetTest();
 		assertNotNull(lfleet);
 		assertEquals(1,lfleet.size());
@@ -478,6 +483,29 @@ public class ShipTestP2 {
 		ship.addFighters(kFleet3);
 		compareLines (kToString3, ship.toString());
 	}
+	
+	/* Test de comprobación de los parámetros null en Ship */
+	@Test
+	public void testRequireNonNull() throws NoFighterAvailableException {
+		
+		try {
+			new Ship(null, Side.REBEL);
+			fail("ERROR: Debió lanzar NullPointerException");
+		}catch (NullPointerException e) {}
+		try {
+			new Ship("Tydirium", null);
+			fail("ERROR: Debió lanzar NullPointerException");
+		}catch (NullPointerException e) {}
+		
+		try {
+			ship.addFighters(null);
+			fail("ERROR: Debió lanzar NullPointerException");
+		}catch (NullPointerException e) {}
+		try {
+			ship.getFirstAvailableFighter(null);
+			fail("ERROR: Debió lanzar NullPointerException");
+		}catch (NullPointerException e) {}
+	}
 
 	/*************************************/
 	//METODOS AUXILIARES PARA LOS TESTS
@@ -500,6 +528,7 @@ public class ShipTestP2 {
 			return null;
 		}	
 	}*/
+	
 	/*Destruye 'max' número de cazas del tipo 'type'. Si type="" destruye
 	 * los 'max' primeros de cualquier tipo.
 	 */
