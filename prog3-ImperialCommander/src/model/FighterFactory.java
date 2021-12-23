@@ -3,9 +3,8 @@
  */
 package model;
 
-import model.fighters.*;
-
-import java.util.Objects;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 /**
  * Class used to create fighters for Imperial Commander game.
@@ -19,6 +18,20 @@ public class FighterFactory {
 	 * @param mother mothership of the fighter to create.
 	 * @return fighter created.
 	 */
+
+	public static Object createFighter(String type, Ship mother) {
+		try {
+			String s = "model.fighters.";
+			s += type;
+			Class f = Class.forName(s);
+			Method m[] = f.getDeclaredMethods();
+			return f.getDeclaredConstructor().newInstance(mother);
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {}
+		return null;
+	}
+}
+
+/*
 	public static Fighter createFighter(String type, Ship mother) {
 		Objects.requireNonNull(mother);
 		switch(type) {
@@ -32,3 +45,4 @@ public class FighterFactory {
 		}
 	}
 }
+*/

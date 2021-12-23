@@ -122,10 +122,15 @@ public class Board {
 					e.getMessage();
 					throw new RuntimeException();
 				}
-				f.getMotherShip().updateResults(result);
-				this.getFighter(c).getMotherShip().updateResults(-result);
+				if (f.isDestroyed()) {
+					f.getMotherShip().updateResults(result,f);
+					this.getFighter(c).getMotherShip().updateResults(-result,f);
+				}
+
 				if (!f.isDestroyed()) {
 					try {
+						f.getMotherShip().updateResults(result,this.getFighter(c));
+						this.getFighter(c).getMotherShip().updateResults(-result,this.getFighter(c));
 						this.removeFighter(this.board.get(c));
 
 
@@ -166,10 +171,11 @@ public class Board {
 								e.getMessage();
 								throw new RuntimeException();
 							}
-							f.getMotherShip().updateResults(result);
-							this.board.get(i).getMotherShip().updateResults(-result);
+
 							if (f.isDestroyed()) {
 								try {
+									f.getMotherShip().updateResults(result,f);
+									this.board.get(i).getMotherShip().updateResults(-result,f);
 									this.removeFighter(f);
 								} catch (FighterNotInBoardException e) {
 									e.getMessage();
@@ -179,6 +185,8 @@ public class Board {
 							}
 							else {
 								try {
+									f.getMotherShip().updateResults(result,this.board.get(i));
+									this.board.get(i).getMotherShip().updateResults(-result,this.board.get(i));
 									this.removeFighter(this.board.get(i));
 								} catch (FighterNotInBoardException e) {
 									e.getMessage();

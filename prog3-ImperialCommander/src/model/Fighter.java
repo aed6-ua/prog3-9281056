@@ -273,5 +273,7 @@ public abstract class Fighter {
 		else return 1;
 	}
 	
-	
+	public int getValue() {
+		return this.attack+this.velocity;
+	}
 }

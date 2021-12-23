@@ -5,6 +5,7 @@ import model.exceptions.FighterAlreadyInBoardException;
 import model.exceptions.FighterNotInBoardException;
 import model.exceptions.OutOfBoundsException;
 import model.game.exceptions.WrongFighterIdException;
+import model.game.score.WinsScore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,11 @@ import java.util.Objects;
  * @author Eduard Andrei Duta | NIE: X9281056G
  */
 public class GameShip extends Ship {
+
+    private WinsScore winsScore;
+
+    private DestroyedFightersScore destroyedFightersScore;
+
     /**
      * Constructor of Ship. Creates a ship with the specified name and side with wins and losses
      * initialized at 0 and an empty fleet.

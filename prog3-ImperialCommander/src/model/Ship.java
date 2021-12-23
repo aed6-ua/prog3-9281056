@@ -107,7 +107,7 @@ public class Ship {
 	 * lost battles.
 	 * @param r number of battles to add
 	 */
-	public void updateResults(int r) {
+	public void updateResults(int r, Fighter f) {
 		if(r==1) {
 			this.wins++;
 		}
