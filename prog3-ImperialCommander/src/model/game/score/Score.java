@@ -29,7 +29,5 @@ public abstract class Score<T> implements Comparable<Score<T>> {
         return "Player "+this.side+": "+this.score;
     }
 
-    public abstract void score(Score<T> sc);
-
-    public abstract void score(Integer w);
+    public abstract void score(T sc);
 }

@@ -8,12 +8,8 @@ public class WinsScore extends Score<Integer>{
         super(side);
     }
 
-    public void score(Integer w) {
-
-    }
-
     @Override
-    public int compareTo(Object o) {
-        return 0;
+    public void score(Integer w) {
+        this.score++;
     }
 }
