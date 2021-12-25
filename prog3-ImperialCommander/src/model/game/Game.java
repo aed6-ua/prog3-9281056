@@ -7,7 +7,10 @@ import java.util.Objects;
 
 import static model.Side.IMPERIAL;
 import static model.Side.REBEL;
-
+/**
+ * Game loop class
+ * @author Eduard Andrei Duta | NIE: X9281056G
+ */
 public class Game {
     /**
      * Game Board
