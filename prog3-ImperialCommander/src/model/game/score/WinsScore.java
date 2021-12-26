@@ -1,6 +1,9 @@
 package model.game.score;
 
 import model.Side;
+
+import java.util.Objects;
+
 /**
  * Score for the wins
  * @author Eduard Andrei Duta | NIE: X9281056G
@@ -16,6 +19,8 @@ public class WinsScore extends Score<Integer>{
 
     @Override
     public void score(Integer w) {
-        this.score++;
+        if (!Objects.isNull(w))
+            if (w.equals(1))
+                this.score++;
     }
 }

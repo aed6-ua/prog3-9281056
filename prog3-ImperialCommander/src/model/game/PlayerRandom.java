@@ -6,6 +6,8 @@ import model.Side;
 import model.exceptions.FighterAlreadyInBoardException;
 import model.exceptions.OutOfBoundsException;
 import model.game.exceptions.WrongFighterIdException;
+import model.game.score.DestroyedFightersScore;
+import model.game.score.WinsScore;
 
 import java.io.BufferedReader;
 import java.util.ArrayList;
@@ -198,5 +200,25 @@ public class PlayerRandom implements IPlayer {
             }
         }
         return true;
+    }
+
+    /**
+     * Gets the wins score
+     *
+     * @return
+     */
+    @Override
+    public WinsScore getWinsScore() {
+        return this.ship.getWinsScore();
+    }
+
+    /**
+     * Gets the destroyed fighters score
+     *
+     * @return
+     */
+    @Override
+    public DestroyedFightersScore getDestroyedFightersScore() {
+        return this.ship.getDestroyedFightersScore();
     }
 }

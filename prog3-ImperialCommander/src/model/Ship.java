@@ -24,11 +24,11 @@ public class Ship {
 	/**
 	 * Number of won battles.
 	 */
-	private int wins;
+	protected int wins;
 	/**
 	 * Number of lost battles.
 	 */
-	private int losses;
+	protected int losses;
 	/**
 	 * List of fighters assigned to the ship.
 	 */

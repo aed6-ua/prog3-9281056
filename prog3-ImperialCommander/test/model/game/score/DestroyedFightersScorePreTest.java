@@ -60,13 +60,13 @@ import model.game
 	 * Comprueba ahora que el que ha aumentado, si es el que invoca a compareTo da un
 	 * valor negativo y si es el menor el que lo invoca, da un valor positivo.
 	 */
-	//TODO
 	@Test
 	public void testCompareTo() {
 		assertTrue(scRebel.compareTo(scRebel)==0);
 		assertTrue(scRebel.compareTo(scImperial)>0);
-		fail("Termina el test");
-		
+		scRebel.score(xWing);
+		assertTrue(scRebel.compareTo(scRebel)==0);
+		assertTrue(scRebel.compareTo(scImperial)<0);
 	}
 
 	/* Se pasan varios Fighters sucesivamente al DestroyedFighterScore scImperial mediante
@@ -79,8 +79,8 @@ import model.game
 		assertEquals(0,scImperial.getScore());
 		scImperial.score(xWing);
 		assertEquals(210,scImperial.getScore());
-		fail("Sigue aplicando score a scImperial con varios Fighters y comprobando "
-				+ "que los valores son correctos");
+		scImperial.score(tieBomber);
+		assertEquals(310,scImperial.getScore());
 	}
 
 
@@ -89,7 +89,6 @@ import model.game
 	 * Aplica el método score sobre scRebel varias veces con distintos tipos de Fighter.
 	 * Comprueba a la vez que la salida va cambiando de valor.
 	 */
-	//TODO
 	@Test
 	public void testToString() {
 			
@@ -101,7 +100,8 @@ import model.game
 		scRebel.score(tieFighter);
 		compareLines ("Player REBEL: 295",scRebel.toString());
 
-		fail("Continúa con el test");	
+		scRebel.score(xWing);
+		compareLines ("Player REBEL: 505",scRebel.toString());
 	}
 	
 	/*************************

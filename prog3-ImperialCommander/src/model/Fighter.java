@@ -272,7 +272,11 @@ public abstract class Fighter {
 		if (this.isDestroyed()) return -1;
 		else return 1;
 	}
-	
+
+	/**
+	 * Gets the value of the fighter for score purposes
+	 * @return the value of the fighter
+	 */
 	public int getValue() {
 		return this.attack+this.velocity;
 	}

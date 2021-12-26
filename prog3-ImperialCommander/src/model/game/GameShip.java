@@ -17,9 +17,13 @@ import java.util.Objects;
  * @author Eduard Andrei Duta | NIE: X9281056G
  */
 public class GameShip extends Ship {
-
+    /**
+     * Wins score
+     */
     private WinsScore winsScore;
-
+    /**
+     * Destroyed fighters based score
+     */
     private DestroyedFightersScore destroyedFightersScore;
 
     /**
@@ -31,6 +35,8 @@ public class GameShip extends Ship {
      */
     public GameShip(String name, Side side) {
         super(name, side);
+        winsScore = new WinsScore(side);
+        destroyedFightersScore = new DestroyedFightersScore(side);
     }
 
     /**
@@ -147,5 +153,35 @@ public class GameShip extends Ship {
             f.addAttack(qty/2);
             f.addShield((qty/2)+1);
         }
+    }
+
+    /**
+     * Gets the wins score
+     * @return the wins score
+     */
+    public WinsScore getWinsScore() {
+        return this.winsScore;
+    }
+
+    /**
+     * Gets the destroyed fighters score
+     * @return the destroyed fighters score
+     */
+    public DestroyedFightersScore getDestroyedFightersScore() {
+        return this.destroyedFightersScore;
+    }
+
+    @Override
+    public void updateResults(int r, Fighter f) {
+        if(r==1) {
+            this.wins++;
+            winsScore.score(1);
+            destroyedFightersScore.score(f);
+        }
+        if(r==-1) {
+            this.losses++;
+
+        }
+
     }
 }

@@ -14,6 +14,29 @@
       <file url="file://$PROJECT_DIR$/prog3-ImperialCommander/test/model/FighterPreTest.java" />
       <file url="file://$PROJECT_DIR$/prog3-ImperialCommander/test/model/FighterTest.java" />
       <file url="file://$PROJECT_DIR$/prog3-ImperialCommander/test/model/CoordinatePreTest.java" />
+      <file url="file://$PROJECT_DIR$/prog3-ImperialCommander/test/model/BoardPreTestP2.java" />
+      <file url="file://$PROJECT_DIR$/prog3-ImperialCommander/test/model/BoardTestP2.java" />
+      <file url="file://$PROJECT_DIR$/prog3-ImperialCommander/test/model/ShipPreTestP2.java" />
+      <file url="file://$PROJECT_DIR$/prog3-ImperialCommander/test/model/FighterTestP2.java" />
+      <file url="file://$PROJECT_DIR$/prog3-ImperialCommander/test/model/FightersTestP3.java" />
+      <file url="file://$PROJECT_DIR$/prog3-ImperialCommander/test/model/ShipTestP2.java" />
+      <file url="file://$PROJECT_DIR$/prog3-ImperialCommander/test/model/FighterFactoryPreTest.java" />
+      <file url="file://$PROJECT_DIR$/prog3-ImperialCommander/test/model/FightersPreTest.java" />
+      <file url="file://$PROJECT_DIR$/prog3-ImperialCommander/test/model/FighterPreTestP2.java" />
+      <file url="file://$PROJECT_DIR$/prog3-ImperialCommander/test/model/FighterFactoryTest.java" />
+      <file url="file://$PROJECT_DIR$/prog3-ImperialCommander/test/model/game/PlayerRandomTest.java" />
+      <file url="file://$PROJECT_DIR$/prog3-ImperialCommander/test/model/game/GameShipTest.java" />
+      <file url="file://$PROJECT_DIR$/prog3-ImperialCommander/test/model/game/GameMorePreTest.java" />
+      <file url="file://$PROJECT_DIR$/prog3-ImperialCommander/test/model/game/GameBoardTest.java" />
+      <file url="file://$PROJECT_DIR$/prog3-ImperialCommander/test/model/game/GameShipPreTest.java" />
+      <file url="file://$PROJECT_DIR$/prog3-ImperialCommander/test/model/game/GameTest.java" />
+      <file url="file://$PROJECT_DIR$/prog3-ImperialCommander/test/model/game/GameShipPreTestDudu.java" />
+      <file url="file://$PROJECT_DIR$/prog3-ImperialCommander/test/model/game/PlayerRandomPreTest.java" />
+      <file url="file://$PROJECT_DIR$/prog3-ImperialCommander/test/model/game/GamePreTest.java" />
+      <file url="file://$PROJECT_DIR$/prog3-ImperialCommander/test/model/game/GameBoardPreTest.java" />
+      <file url="file://$PROJECT_DIR$/prog3-ImperialCommander/test/model/game/PlayerFilePreTest.java" />
+      <file url="file://$PROJECT_DIR$/prog3-ImperialCommander/test/model/game/PlayerFileTest.java" />
+      <file url="file://$PROJECT_DIR$/prog3-ImperialCommander/test/model/game/GameBoardPreTestDudu.java" />
     </excludeFromCompile>
   </component>
 </project>

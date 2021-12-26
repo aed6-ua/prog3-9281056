@@ -43,7 +43,7 @@ public abstract class Score<T> implements Comparable<Score<T>> {
             return 1;
         else if (this.score > other.score)
             return -1;
-        return 0;
+        return this.side.compareTo(other.side);
     }
 
     /**

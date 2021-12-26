@@ -2,6 +2,9 @@ package model.game;
 
 import model.Side;
 import model.exceptions.InvalidSizeException;
+import model.game.score.DestroyedFightersScore;
+import model.game.score.Ranking;
+import model.game.score.WinsScore;
 
 import java.util.Objects;
 
@@ -57,6 +60,21 @@ public class Game {
     }
 
     /**
+     * Method for printing the rankings
+     */
+    private void showRankings() {
+        Ranking<WinsScore> ws = new Ranking<>();
+        Ranking<DestroyedFightersScore> dfs = new Ranking<>();
+        ws.addScore(this.imperial.getWinsScore());
+        ws.addScore(this.rebel.getWinsScore());
+        dfs.addScore(this.imperial.getDestroyedFightersScore());
+        dfs.addScore(this.rebel.getDestroyedFightersScore());
+
+        System.out.print("RANKING WINS:  "+ws.toString()+"\n");
+        System.out.print("RANKING DESTROYED:  "+dfs.toString()+"\n");
+    }
+
+    /**
      * Game loop.
      * @return
      */
@@ -65,6 +83,7 @@ public class Game {
         rebel.initFighters();
         Side winner;
         while (true) {
+            showRankings();
             System.out.print("BEFORE IMPERIAL\n");
             System.out.print(this.board.toString()+"\n");
             System.out.print("\n"+this.imperial.showShip()+"\n");
@@ -86,7 +105,8 @@ public class Game {
                 winner = IMPERIAL;
                 break;
             }
-            System.out.print("\nREBEL("+this.board.numFighters(REBEL)+"): ");
+            System.out.print("\n");
+            System.out.print("REBEL("+this.board.numFighters(REBEL)+"): ");
             if (!this.rebel.nextPlay()) {
                 winner = IMPERIAL;
                 break;
@@ -108,6 +128,7 @@ public class Game {
         }
         this.imperial.purgeFleet();
         this.rebel.purgeFleet();
+        showRankings();
         return winner;
     }
 }

@@ -64,13 +64,19 @@ public class WinsScorePreTest {
 	 * Comprueba con getScore() que  los valores que se van obteniendo se van 
 	 * acumulando sucesivamente. 
 	 */
-	//TODO
 	@Test
 	public void testScoreCraft() {
 		assertEquals(0,scImperial.getScore());
 		scImperial.score(10);
 		assertEquals(0,scImperial.getScore());
-		fail("Termina el test");
+		scImperial.score(1);
+		assertEquals(1,scImperial.getScore());
+		scImperial.score(0);
+		assertEquals(1,scImperial.getScore());
+		scImperial.score(5);
+		assertEquals(1,scImperial.getScore());
+		scImperial.score(1);
+		assertEquals(2,scImperial.getScore());
 	}
 	
 	/* Se comprueba toString sobre el WinsScore scRebel y se comprueba que
@@ -87,7 +93,14 @@ public class WinsScorePreTest {
 	
 		scRebel.score(0);
 		compareLines ("Player REBEL: 0",scRebel.toString());
-		fail("Termina el test");
+		scRebel.score(1);
+		compareLines ("Player REBEL: 1",scRebel.toString());
+		scRebel.score(1);
+		compareLines ("Player REBEL: 2",scRebel.toString());
+		scRebel.score(1);
+		compareLines ("Player REBEL: 3",scRebel.toString());
+		scRebel.score(11);
+		compareLines ("Player REBEL: 3",scRebel.toString());
 	}
 	
 	/*************************

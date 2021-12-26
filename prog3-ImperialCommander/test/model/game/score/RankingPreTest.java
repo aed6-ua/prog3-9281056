@@ -56,7 +56,6 @@ public class RankingPreTest {
 	 * Comprueba que la salida  coincide con SRANKING2
 	 * 
 	 */
-	//TODO
 	@Test
 	public void testAddScore() {
 		//Iniciamos marcadores para Julia
@@ -75,7 +74,6 @@ public class RankingPreTest {
 		}
 		destroyedRanking.addScore(destroyedScore);
 		winsRanking.addScore(winsScore);
-		fail ("Continúa con el test ahora para Rebel y haz la comprobación");
 		
 	}
 	
@@ -95,7 +93,6 @@ public class RankingPreTest {
 	 * Comprueba luego que los getWinner son efectivamente los primeros esperados (de más valor)
 	 * en ambos rankings
 	 */
-	//TODO
 	@Test
 	public void testGetWinner() {
 		//Iniciamos marcadores para Imperial
@@ -107,8 +104,19 @@ public class RankingPreTest {
 		}
 		destroyedRanking.addScore(destroyedScore);
 		winsRanking.addScore(winsScore);
-		
-		fail("Realiza algo parecido para REBEL y luego haz las comprobaciones finales con getWinner");
+
+
+		winsScore = new WinsScore(Side.REBEL);
+		destroyedScore = new DestroyedFightersScore(Side.REBEL);
+		for (int i=0; i<3000; i++) {
+			winsScore.score(1);
+			destroyedScore.score(FighterFactory.createFighter(kREBEL_FIGHTERS[i%3], rebelShip));
+		}
+		destroyedRanking.addScore(destroyedScore);
+		winsRanking.addScore(winsScore);
+
+		assertEquals(winsScore,winsRanking.getWinner());
+		assertEquals(destroyedScore,destroyedRanking.getWinner());
 	}
 
 	

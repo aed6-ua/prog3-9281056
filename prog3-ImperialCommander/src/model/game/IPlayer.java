@@ -1,5 +1,8 @@
 package model.game;
 
+import model.game.score.DestroyedFightersScore;
+import model.game.score.WinsScore;
+
 /**
  * Interface for the players. Contains methods needed for playing the game.
  * @author Eduard Andrei Duta | NIE: X9281056G
@@ -48,4 +51,16 @@ public interface IPlayer {
      * @return true if the player continues the game, false if the player exits.
      */
     public boolean nextPlay();
+
+    /**
+     * Gets the wins score
+     * @return
+     */
+    public WinsScore getWinsScore();
+
+    /**
+     * Gets the destroyed fighters score
+     * @return
+     */
+    public DestroyedFightersScore getDestroyedFightersScore();
 }

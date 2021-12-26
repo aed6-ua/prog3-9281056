@@ -7,6 +7,8 @@ import model.exceptions.FighterNotInBoardException;
 import model.exceptions.NoFighterAvailableException;
 import model.exceptions.OutOfBoundsException;
 import model.game.exceptions.WrongFighterIdException;
+import model.game.score.DestroyedFightersScore;
+import model.game.score.WinsScore;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -203,6 +205,26 @@ public class PlayerFile implements IPlayer {
             throw new RuntimeException();
         }
         return true;
+    }
+
+    /**
+     * Gets the wins score
+     *
+     * @return
+     */
+    @Override
+    public WinsScore getWinsScore() {
+        return this.ship.getWinsScore();
+    }
+
+    /**
+     * Gets the destroyed fighters score
+     *
+     * @return
+     */
+    @Override
+    public DestroyedFightersScore getDestroyedFightersScore() {
+        return this.ship.getDestroyedFightersScore();
     }
 
 }
