@@ -48,8 +48,8 @@ public abstract class Score<T> implements Comparable<Score<T>> {
     }
 
     /**
-     * Prints a string with the the players side and score
-     * @return a string with the the players side and score
+     * Prints a string with the players side and score
+     * @return a string with the players side and score
      */
     public String toString() {
         return "Player "+this.side+": "+this.score;
