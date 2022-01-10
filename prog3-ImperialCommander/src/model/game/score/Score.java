@@ -4,6 +4,7 @@ import model.Side;
 /**
  * Score class used to store the side and value of a score
  * @author Eduard Andrei Duta | NIE: X9281056G
+ * @param <T> parameter that determines the type of score, can be Integer or Fighter.
  */
 public abstract class Score<T> implements Comparable<Score<T>> {
     /**

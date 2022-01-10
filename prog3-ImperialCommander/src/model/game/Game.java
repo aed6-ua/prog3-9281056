@@ -76,7 +76,7 @@ public class Game {
 
     /**
      * Game loop.
-     * @return
+     * @return returns the winner Side.
      */
     public Side play() {
         imperial.initFighters();

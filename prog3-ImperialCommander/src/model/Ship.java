@@ -106,6 +106,7 @@ public class Ship {
 	 * positive it will add that many won battles and if it's negative it will add that many 
 	 * lost battles.
 	 * @param r number of battles to add
+	 * @param f fighter destroyed in the fight that triggered the update
 	 */
 	public void updateResults(int r, Fighter f) {
 		if(r==1) {

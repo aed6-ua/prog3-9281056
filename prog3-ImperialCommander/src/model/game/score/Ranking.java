@@ -5,6 +5,7 @@ import java.util.TreeSet;
 /**
  * Ranking of a specific type of score
  * @author Eduard Andrei Duta | NIE: X9281056G
+ * @param <ScoreType> parameter of type restricted to Score or subclasses of Score
  */
 public class Ranking<ScoreType extends Score<?>> {
     /**

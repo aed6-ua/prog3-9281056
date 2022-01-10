@@ -14,6 +14,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Objects;
 
+/**
+ * Player created from a file.
+ * @author Eduard Andrei Duta | NIE: X9281056G
+ */
 public class PlayerFile implements IPlayer {
 
     private BufferedReader br;
@@ -210,7 +214,7 @@ public class PlayerFile implements IPlayer {
     /**
      * Gets the wins score
      *
-     * @return
+     * @return the WinsScore
      */
     @Override
     public WinsScore getWinsScore() {
@@ -220,7 +224,7 @@ public class PlayerFile implements IPlayer {
     /**
      * Gets the destroyed fighters score
      *
-     * @return
+     * @return the DestroyedFightersScore
      */
     @Override
     public DestroyedFightersScore getDestroyedFightersScore() {

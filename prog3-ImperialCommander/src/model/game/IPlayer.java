@@ -54,13 +54,13 @@ public interface IPlayer {
 
     /**
      * Gets the wins score
-     * @return
+     * @return the WinsScore
      */
     public WinsScore getWinsScore();
 
     /**
      * Gets the destroyed fighters score
-     * @return
+     * @return the DestroyedFightersScore
      */
     public DestroyedFightersScore getDestroyedFightersScore();
 }
