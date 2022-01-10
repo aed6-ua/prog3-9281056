@@ -19,7 +19,9 @@ import java.util.Objects;
  * @author Eduard Andrei Duta | NIE: X9281056G
  */
 public class PlayerFile implements IPlayer {
-
+    /**
+     * BufferedReader that stores contents of file
+     */
     private BufferedReader br;
 
     /**
@@ -34,7 +36,7 @@ public class PlayerFile implements IPlayer {
 
     /**
      * Constructor for PlayerFile. Creates a GameShip named PlayerFile "SIDE" Ship tih specified side,
-     * and assigns specified BufferedReder to the class BufferedReader
+     * and assigns specified BufferedReader to the class BufferedReader
      * @param side of the GameShip
      * @param br BufferedReader to assign to the class
      */
